@@ -25,7 +25,7 @@ namespace ContractManagment.Client.Commands
 
         public async void Execute(object parameter)
         {
-            bool succes = await _authenticator.Login(_loginVM.Login, parameter.ToString());
+            bool succes = _authenticator.Login(_loginVM.Login, parameter.ToString());
         }
     }
 }

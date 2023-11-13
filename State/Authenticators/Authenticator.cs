@@ -1,5 +1,6 @@
 ﻿using ContractManagment.Client.Core;
 using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.State.WebClients;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace ContractManagment.Client.State.Authenticators
     public class Authenticator : ObservableObject, IAuthenticator
     {
         private LoginUserModel _currentUser;
+        private IWebClient _webClient;
         public LoginUserModel CurrentUser {
             get
             {
@@ -24,31 +26,18 @@ namespace ContractManagment.Client.State.Authenticators
         }
         public bool IsLoggedIn => CurrentUser != null;
 
-        private HttpClient _client;
-
-        public Authenticator()
+        public Authenticator(IWebClient client)
         {
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                };
-            _client = new HttpClient(handler);
-            XDocument document = XDocument.Load("appsettings.xml");
-            XElement? settings = document.Element("settings");
-            XElement? address = settings.Element("ServerAddress");
-            _client.BaseAddress = new Uri(address.Value);
+            _webClient = client;
         }
 
 
-        public async Task<bool> Login(string username, string password)
+        public bool Login(string username, string password)
         {
             try
             {
                 ShortUserModel loginUser = new() { Name = username, Password = password };
-                CurrentUser = await _client.PostAsJsonAsync("/login", loginUser).Result.Content.ReadAsAsync<LoginUserModel>();
+                CurrentUser = _webClient.Login(loginUser);
                 return true;
             }
             catch

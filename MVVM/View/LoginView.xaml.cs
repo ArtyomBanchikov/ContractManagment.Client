@@ -47,9 +47,11 @@ namespace ContractManagment.Client.MVVM.View
                     LoginCommand.Execute(passwordHasher.HashPassword(password_box.Password));
                     if (_authenticator != null && _authenticator.IsLoggedIn)
                     {
-                        XDocument document = XDocument.Load("UserInfo.xml");
-                        XElement? userInfo = document.Element("userinfo");
-                        XElement? isRemember = userInfo.Element("IsRemember");
+                        XDocument userDoc = XDocument.Load("UserInfo.xml");
+                        XDocument settingsDoc = XDocument.Load("appsettings.xml");
+                        XElement? userInfo = userDoc.Element("userinfo");
+                        XElement? settingsInfo = settingsDoc.Element("settings");
+                        XElement? isRemember = settingsInfo.Element("IsRemember");
                         XElement? token = userInfo.Element("Token");
 
                         if ((bool)RememberCheck.IsChecked)
@@ -58,13 +60,15 @@ namespace ContractManagment.Client.MVVM.View
                             byte[] plaintextBytes = _authenticator.CurrentUser.Token.ToByteArray();
                             byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
                             token.Value = encodedBytes.InString();
-                            document.Save("UserInfo.xml");
+                            userDoc.Save("UserInfo.xml");
+                            settingsDoc.Save("appsettings.xml");
                         }
                         else if(isRemember.Value == "true")
                         {
-                            isRemember.Value = "";
+                            isRemember.Value = "false";
                             token.Value = "";
-                            document.Save("UserInfo.xml");
+                            userDoc.Save("UserInfo.xml");
+                            settingsDoc.Save("appsettings.xml");
                         }
                         _mainWindow.Show();
                         Close();

@@ -1,26 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ContractManagment.Client.MVVM.Model.User;
+using System;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Xml.Linq;
 
 namespace ContractManagment.Client.State.WebClients
 {
     public class WebClient : IWebClient
     {
-        public HttpClient client => throw new NotImplementedException();
-
-        public string Token { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public HttpClient Client { get; }
+        public string Token { get; }
 
         public WebClient()
         {
-            
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                };
+            Client = new HttpClient(handler);
+            XDocument document = XDocument.Load("appsettings.xml");
+            XElement? settings = document.Element("settings");
+            XElement? address = settings.Element("ServerAddress");
+            Client.BaseAddress = new Uri(address.Value);
         }
 
-        public T Get(T obj)
+        public LoginUserModel Login(ShortUserModel user)
         {
+            var response = Client.PostAsJsonAsync($"/login", user).Result;
+            LoginUserModel loginUser = response.Content.ReadFromJsonAsync<LoginUserModel>().Result;
+            if (loginUser != null)
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginUser.Token);
+            return loginUser;
+        }
 
+        public void Logout()
+        {
+            throw new NotImplementedException();
+        }
+
+        public LoginUserModel TokenInfo()
+        {
+            LoginUserModel user = Client.GetFromJsonAsync<LoginUserModel>($"/tokeninfo/token").Result;
+            return user;
         }
     }
 }

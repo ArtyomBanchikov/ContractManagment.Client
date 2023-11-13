@@ -1,6 +1,9 @@
-﻿using ContractManagment.Client.MVVM.View;
+﻿using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.MVVM.View;
 using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.State.Authenticators;
+using ContractManagment.Client.State.WebClients;
+using ContractManagment.Client.State.WebClients.ModelClients;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
@@ -36,6 +39,9 @@ namespace ContractManagment.Client
         private IServiceProvider CreateServiceProvider()
         {
             IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IWebClient, WebClient>();
+            services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
+
             services.AddSingleton<IAuthenticator, Authenticator>();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>();
