@@ -18,10 +18,10 @@ namespace ContractManagment.Client.MVVM.View
         private IAuthenticator _authenticator;
         private MainWindow _mainWindow;
         private IPasswordHasher passwordHasher;
-        public LoginView(object datacontext, IAuthenticator authenticator, MainWindow mainWindow)
+        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, MainWindow mainWindow)
         {
-            DataContext = datacontext;
-            LoginCommand = ((LoginViewModel)datacontext).LoginCommand;
+            DataContext = viewModel;
+            LoginCommand = viewModel.LoginCommand;
             _authenticator = authenticator;
             _mainWindow = mainWindow;
             passwordHasher = new PasswordHasher();

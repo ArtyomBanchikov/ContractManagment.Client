@@ -2,6 +2,7 @@
 using ContractManagment.Client.MVVM.View;
 using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.State.Authenticators;
+using ContractManagment.Client.State.Navigators;
 using ContractManagment.Client.State.WebClients;
 using ContractManagment.Client.State.WebClients.ModelClients;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,12 +42,13 @@ namespace ContractManagment.Client
             IServiceCollection services = new ServiceCollection();
             services.AddSingleton<IWebClient, WebClient>();
             services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
-
+            services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>();
             services.AddSingleton<LoginViewModel>();
-            services.AddSingleton<LoginView>(w => new LoginView(w.GetRequiredService<LoginViewModel>(), w.GetRequiredService<IAuthenticator>(), w.GetRequiredService<MainWindow>()));
+            //services.AddSingleton<LoginView>(w => new LoginView(w.GetRequiredService<LoginViewModel>(), w.GetRequiredService<IAuthenticator>(), w.GetRequiredService<MainWindow>()));
+            services.AddSingleton<LoginView>();
             return services.BuildServiceProvider();
         }
     }
