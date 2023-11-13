@@ -1,0 +1,15 @@
+﻿<Application x:Class="ContractManagment.Client.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:ContractManagment.Client.MVVM.ViewModel"
+             xmlns:views="clr-namespace:ContractManagment.Client.MVVM.View"
+             xmlns:local="clr-namespace:ContractManagment.Client">
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <views:LoginView LoginCommand="{Binding LoginCommand}"/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
