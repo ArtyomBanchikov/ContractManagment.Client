@@ -1,19 +1,22 @@
-﻿using System;
+﻿using ContractManagment.Client.State;
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Windows.Xps.Serialization;
 using System.Xml.Linq;
 
-namespace ContractManagment.Client.State.XmlProviders
+namespace ContractManagment.Client.Services.XmlServices
 {
-    public class XmlProvider : IXmlProvider
+    public class XmlService : IXmlService
     {
         private readonly XDocument _userDoc;
         private readonly XDocument _settingsDoc;
-        public XmlProvider()
+        public XmlService()
         {
             _userDoc = XDocument.Load("UserInfo.xml");
             _settingsDoc = XDocument.Load("appsettings.xml");
 
-            if(_userDoc == null)
+            if (_userDoc == null)
             {
                 _userDoc = new XDocument();
             }
@@ -42,7 +45,7 @@ namespace ContractManagment.Client.State.XmlProviders
                 _settingsDoc.Add(settingsInfo);
             }
             XElement isRemember = settingsInfo.Element("IsRemember");
-            if(isRemember == null)
+            if (isRemember == null)
             {
                 isRemember = new XElement("IsRemember");
                 settingsInfo.Add(isRemember);
@@ -64,15 +67,24 @@ namespace ContractManagment.Client.State.XmlProviders
             get
             {
                 XElement userInfo = _userDoc.Element("userinfo");
-                return userInfo.Element("Token").Value;
+
+                byte[] encodedBytes = userInfo.Element("Token").Value.InByteArray();
+                byte[] plaintextBytes = ProtectedData.Unprotect(encodedBytes, null, DataProtectionScope.CurrentUser);
+
+                return plaintextBytes.ToHexString();
             }
             set
             {
                 XElement userInfo = _userDoc.Element("userinfo");
                 XElement token = userInfo.Element("Token");
-                token.Value = value;
+
+                byte[] plaintextBytes = value.ToByteArray();
+                byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
+
+                token.Value = encodedBytes.InString();
+
                 _userDoc.Save("UserInfo.xml");
-            }
+             }
         }
 
         public string ServerAddress
@@ -91,18 +103,20 @@ namespace ContractManagment.Client.State.XmlProviders
             }
         }
 
-        public string IsRemember
+        public bool IsRemember
         {
             get
             {
                 XElement settingsInfo = _settingsDoc.Element("settings");
-                return settingsInfo.Element("IsRemember").Value;
+                bool succes = false;
+                bool.TryParse(settingsInfo.Element("IsRemember").Value, out succes);
+                return succes;
             }
             set
             {
                 XElement settingsInfo = _settingsDoc.Element("settings");
                 XElement isRemember = settingsInfo.Element("IsRemember");
-                isRemember.Value = value;
+                isRemember.Value = value.ToString();
                 _settingsDoc.Save("appsettings.xml");
             }
         }

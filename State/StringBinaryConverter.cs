@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace ContractManagment.Client.State
 {
@@ -17,12 +18,25 @@ namespace ContractManagment.Client.State
         public static string InString(this byte[] bytes)
         {
             string str = "";
-            foreach (byte b in bytes)
+            for (int i = 0; i < bytes.Length; i++)
             {
-                str += b;
-                str += " ";
+                str += bytes[i];
+                if (i < bytes.Length - 1)
+                    str += " ";
             }
+
             return str;
+        }
+        public static byte[] InByteArray(this string str)
+        {
+            string[] subs = str.Split(' ');
+            byte[] bytes = new byte[subs.Length];
+
+            for(int i = 0; i < subs.Length; i++)
+            {
+                bytes[i] = Convert.ToByte(subs[i]);
+            }
+            return bytes;
         }
     }
 }
