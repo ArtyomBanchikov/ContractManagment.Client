@@ -5,12 +5,10 @@ using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
 using ContractManagment.Client.State.WebClients;
 using ContractManagment.Client.State.WebClients.ModelClients;
+using ContractManagment.Client.State.XmlProviders;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Configuration;
 using System.Windows;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace ContractManagment.Client
 {
@@ -22,11 +20,9 @@ namespace ContractManagment.Client
         protected override void OnStartup(StartupEventArgs e)
         {
             Window window;
-            XDocument document = XDocument.Load("appsettings.xml");
-            XElement? settings = document.Element("settings");
-            XElement? isRemember = settings.Element("IsRemember");
             IServiceProvider serviceProvider = CreateServiceProvider();
-            if (isRemember != null && isRemember.Value == "true")
+            IXmlProvider xmlProvider = serviceProvider.GetRequiredService<IXmlProvider>();
+            if (xmlProvider.IsRemember == "true")
             {
                 window = serviceProvider.GetRequiredService<MainWindow>();
             }
@@ -40,6 +36,7 @@ namespace ContractManagment.Client
         private IServiceProvider CreateServiceProvider()
         {
             IServiceCollection services = new ServiceCollection();
+            services.AddSingleton<IXmlProvider, XmlProvider>();
             services.AddSingleton<IWebClient, WebClient>();
             services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
             services.AddSingleton<INavigator, Navigator>();

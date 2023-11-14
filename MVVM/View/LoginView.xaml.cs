@@ -1,11 +1,11 @@
 ﻿using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.State;
 using ContractManagment.Client.State.Authenticators;
+using ContractManagment.Client.State.XmlProviders;
 using Microsoft.AspNet.Identity;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace ContractManagment.Client.MVVM.View
 {
@@ -18,13 +18,15 @@ namespace ContractManagment.Client.MVVM.View
         private IAuthenticator _authenticator;
         private MainWindow _mainWindow;
         private IPasswordHasher passwordHasher;
-        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, MainWindow mainWindow)
+        private IXmlProvider _xmlProvider;
+        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, MainWindow mainWindow, IXmlProvider xmlProvider)
         {
             DataContext = viewModel;
             LoginCommand = viewModel.LoginCommand;
             _authenticator = authenticator;
             _mainWindow = mainWindow;
             passwordHasher = new PasswordHasher();
+            _xmlProvider = xmlProvider;
             InitializeComponent();
         }
 
@@ -47,28 +49,17 @@ namespace ContractManagment.Client.MVVM.View
                     LoginCommand.Execute(passwordHasher.HashPassword(password_box.Password));
                     if (_authenticator != null && _authenticator.IsLoggedIn)
                     {
-                        XDocument userDoc = XDocument.Load("UserInfo.xml");
-                        XDocument settingsDoc = XDocument.Load("appsettings.xml");
-                        XElement? userInfo = userDoc.Element("userinfo");
-                        XElement? settingsInfo = settingsDoc.Element("settings");
-                        XElement? isRemember = settingsInfo.Element("IsRemember");
-                        XElement? token = userInfo.Element("Token");
-
                         if ((bool)RememberCheck.IsChecked)
                         {
-                            isRemember.Value = "true";
+                            _xmlProvider.IsRemember = "true";
                             byte[] plaintextBytes = _authenticator.CurrentUser.Token.ToByteArray();
                             byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
-                            token.Value = encodedBytes.InString();
-                            userDoc.Save("UserInfo.xml");
-                            settingsDoc.Save("appsettings.xml");
+                            _xmlProvider.Token = encodedBytes.InString();
                         }
-                        else if(isRemember.Value == "true")
+                        else if(_xmlProvider.IsRemember == "true")
                         {
-                            isRemember.Value = "false";
-                            token.Value = "";
-                            userDoc.Save("UserInfo.xml");
-                            settingsDoc.Save("appsettings.xml");
+                            _xmlProvider.IsRemember="false";
+                            _xmlProvider.Token = "";
                         }
                         _mainWindow.Show();
                         Close();
