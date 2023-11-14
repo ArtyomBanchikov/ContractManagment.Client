@@ -9,5 +9,6 @@ namespace ContractManagment.Client.State.Authenticators
         bool IsLoggedIn { get; }
         bool Login(string username, string password);
         void Logout();
+        LoginUserModel TokenCheck(string token);
     }
 }

@@ -12,7 +12,7 @@ namespace ContractManagment.Client.State.WebClients
     {
         HttpClient Client { get; }
         string Token { get; }
-        LoginUserModel TokenInfo();
+        LoginUserModel TokenInfo(string token);
         LoginUserModel Login(ShortUserModel user);
         void Logout();
     }

@@ -1,4 +1,5 @@
 ﻿using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.Services.XmlServices;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +13,7 @@ namespace ContractManagment.Client.State.WebClients
         public HttpClient Client { get; }
         public string Token { get; }
 
-        public WebClient()
+        public WebClient(IXmlService xmlProvider)
         {
             var handler = new HttpClientHandler();
             handler.ClientCertificateOptions = ClientCertificateOption.Manual;
@@ -22,10 +23,7 @@ namespace ContractManagment.Client.State.WebClients
                     return true;
                 };
             Client = new HttpClient(handler);
-            XDocument document = XDocument.Load("appsettings.xml");
-            XElement? settings = document.Element("settings");
-            XElement? address = settings.Element("ServerAddress");
-            Client.BaseAddress = new Uri(address.Value);
+            Client.BaseAddress = new Uri(xmlProvider.ServerAddress);
         }
 
         public LoginUserModel Login(ShortUserModel user)
@@ -42,10 +40,26 @@ namespace ContractManagment.Client.State.WebClients
             throw new NotImplementedException();
         }
 
-        public LoginUserModel TokenInfo()
+        public LoginUserModel TokenInfo(string token)
         {
-            LoginUserModel user = Client.GetFromJsonAsync<LoginUserModel>($"/tokeninfo/token").Result;
-            return user;
+            try
+            {
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                LoginUserModel user = Client.GetFromJsonAsync<LoginUserModel>($"/userinfo/").Result;
+                return user;
+            }
+            catch (Exception ex) when (ex.InnerException.Message == "Response status code does not indicate success: 404 (Not Found).")
+            {
+                throw new Exception("Ранее сохранённый пользователь больше не действителен");
+            }
+            catch (Exception ex) when (ex.InnerException.Message == "Response status code does not indicate success: 401 (Unauthorized).")
+            {
+                throw new Exception("Срок авторизации истёк");
+            }
+            catch
+            {
+                throw new Exception("Не удалось подключиться к серверу");
+            }
         }
     }
 }

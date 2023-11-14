@@ -1,8 +1,12 @@
 ﻿using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State;
 using ContractManagment.Client.State.Authenticators;
-using ContractManagment.Client.State.XmlProviders;
+using ContractManagment.Client.State.Navigators;
 using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
@@ -16,15 +20,14 @@ namespace ContractManagment.Client.MVVM.View
     {
         public ICommand LoginCommand { get; set; }
         private IAuthenticator _authenticator;
-        private MainWindow _mainWindow;
         private IPasswordHasher passwordHasher;
-        private IXmlProvider _xmlProvider;
-        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, MainWindow mainWindow, IXmlProvider xmlProvider)
+        private IXmlService _xmlProvider;
+        public IServiceProvider ServiceProvider { get; set; }
+        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, IXmlService xmlProvider)
         {
             DataContext = viewModel;
             LoginCommand = viewModel.LoginCommand;
             _authenticator = authenticator;
-            _mainWindow = mainWindow;
             passwordHasher = new PasswordHasher();
             _xmlProvider = xmlProvider;
             InitializeComponent();
@@ -51,17 +54,16 @@ namespace ContractManagment.Client.MVVM.View
                     {
                         if ((bool)RememberCheck.IsChecked)
                         {
-                            _xmlProvider.IsRemember = "true";
-                            byte[] plaintextBytes = _authenticator.CurrentUser.Token.ToByteArray();
-                            byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
-                            _xmlProvider.Token = encodedBytes.InString();
+                            _xmlProvider.IsRemember = true;
+                            _xmlProvider.Token = _authenticator.CurrentUser.Token;
                         }
-                        else if(_xmlProvider.IsRemember == "true")
+                        else if(_xmlProvider.IsRemember)
                         {
-                            _xmlProvider.IsRemember="false";
+                            _xmlProvider.IsRemember=false;
                             _xmlProvider.Token = "";
                         }
-                        _mainWindow.Show();
+                        MainWindow window = ServiceProvider.GetRequiredService<MainWindow>();
+                        window.Show();
                         Close();
                     }
                     else

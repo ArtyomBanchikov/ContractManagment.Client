@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ContractManagment.Client.State.Navigators
 {
-    public class Navigator : ViewModelBase, INavigator
+    public class Navigator : ObservableObject, INavigator
     {
         public ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel

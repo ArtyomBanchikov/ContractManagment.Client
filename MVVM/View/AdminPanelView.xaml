@@ -7,6 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+        <StackPanel>
+            <RadioButton Content="Ключи"
+                         Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="Документы"
+                         Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="Пользователи"
+                         Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="История"
+                         Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="Заявки"
+                         Style="{StaticResource MenuButtonTheme}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

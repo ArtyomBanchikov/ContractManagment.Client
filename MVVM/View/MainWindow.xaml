@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ContractManagment.Client"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#5C5F68">
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="150" MaxWidth="200"/>
             <ColumnDefinition/>
@@ -17,10 +17,11 @@
         </Grid.RowDefinitions>
 
         <ContentControl Grid.Column="1"
-                        Grid.RowSpan="2"/>
+                        Grid.RowSpan="2"
+                        Content="{Binding Navigator.CurrentViewModel}"/>
         <ContentControl Grid.Row="0"
                         Grid.Column="0"
-                        Content="{Binding Navigator.CurrentViewModel}"/>
+                        Content="{Binding Panel}"/>
 
     </Grid>
 </Window>

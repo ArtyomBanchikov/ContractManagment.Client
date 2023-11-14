@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="MVVM\Model\Client\" />
     <Folder Include="MVVM\Model\Post\" />
-    <Folder Include="Themes\" />
   </ItemGroup>
 
   <ItemGroup>

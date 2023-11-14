@@ -12,16 +12,26 @@ namespace ContractManagment.Client.MVVM.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public IAuthenticator Authenticator { get; set; }
-        public INavigator Navigator { get; set; }
-        private LoginUserModel _user;
-
-        public LoginUserModel User
+        private object _panel;
+        public object Panel
         {
-            get { return _user; }
+            get { return _panel; }
             set
             {
-                _user = value;
+                _panel = value;
+                OnPropertyChanged();
+            }
+        }
+        public IAuthenticator Authenticator { get; set; }
+        public INavigator Navigator { get; set; }
+        private LoginUserModel _currentUser;
+
+        public LoginUserModel CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
                 OnPropertyChanged();
             }
         }
@@ -30,7 +40,18 @@ namespace ContractManagment.Client.MVVM.ViewModel
         {
             Navigator = navigator;
             Authenticator = authenticator;
-            User = Authenticator.CurrentUser;
+            if (Authenticator.IsLoggedIn)
+            {
+                if (Authenticator.CurrentUser.Role == "user")
+                {
+                    Panel = new UserPanelViewModel();
+                }
+                else if (Authenticator.CurrentUser.Role == "admin")
+                {
+                    Panel = new AdminPanelViewModel();
+                }
+            }
+
         }
     }
 }
