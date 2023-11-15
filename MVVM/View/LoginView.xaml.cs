@@ -1,11 +1,15 @@
 ﻿using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State;
 using ContractManagment.Client.State.Authenticators;
+using ContractManagment.Client.State.Navigators;
 using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace ContractManagment.Client.MVVM.View
 {
@@ -16,15 +20,16 @@ namespace ContractManagment.Client.MVVM.View
     {
         public ICommand LoginCommand { get; set; }
         private IAuthenticator _authenticator;
-        private MainWindow _mainWindow;
         private IPasswordHasher passwordHasher;
-        public LoginView(object datacontext, IAuthenticator authenticator, MainWindow mainWindow)
+        private IXmlService _xmlProvider;
+        public IServiceProvider ServiceProvider { get; set; }
+        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, IXmlService xmlProvider)
         {
-            DataContext = datacontext;
-            LoginCommand = ((LoginViewModel)datacontext).LoginCommand;
+            DataContext = viewModel;
+            LoginCommand = viewModel.LoginCommand;
             _authenticator = authenticator;
-            _mainWindow = mainWindow;
             passwordHasher = new PasswordHasher();
+            _xmlProvider = xmlProvider;
             InitializeComponent();
         }
 
@@ -47,26 +52,18 @@ namespace ContractManagment.Client.MVVM.View
                     LoginCommand.Execute(passwordHasher.HashPassword(password_box.Password));
                     if (_authenticator != null && _authenticator.IsLoggedIn)
                     {
-                        XDocument document = XDocument.Load("UserInfo.xml");
-                        XElement? userInfo = document.Element("userinfo");
-                        XElement? isRemember = userInfo.Element("IsRemember");
-                        XElement? token = userInfo.Element("Token");
-
                         if ((bool)RememberCheck.IsChecked)
                         {
-                            isRemember.Value = "true";
-                            byte[] plaintextBytes = _authenticator.CurrentUser.Token.ToByteArray();
-                            byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
-                            token.Value = encodedBytes.InString();
-                            document.Save("UserInfo.xml");
+                            _xmlProvider.IsRemember = true;
+                            _xmlProvider.Token = _authenticator.CurrentUser.Token;
                         }
-                        else if(isRemember.Value == "true")
+                        else if(_xmlProvider.IsRemember)
                         {
-                            isRemember.Value = "";
-                            token.Value = "";
-                            document.Save("UserInfo.xml");
+                            _xmlProvider.IsRemember=false;
+                            _xmlProvider.Token = "";
                         }
-                        _mainWindow.Show();
+                        MainWindow window = ServiceProvider.GetRequiredService<MainWindow>();
+                        window.Show();
                         Close();
                     }
                     else

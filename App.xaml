@@ -6,10 +6,18 @@
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
         <ResourceDictionary>
-            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+            <!--<DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
                 <views:LoginView LoginCommand="{Binding LoginCommand}"/>
+            </DataTemplate>-->
+            <DataTemplate DataType="{x:Type viewModels:AdminPanelViewModel}">
+                <views:AdminPanelView/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type viewModels:UserPanelViewModel}">
+                <views:UserPanelView/>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

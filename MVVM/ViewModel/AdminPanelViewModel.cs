@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContractManagment.Client.MVVM.View
+namespace ContractManagment.Client.MVVM.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class AdminPanelViewModel : ViewModelBase
     {
-        
     }
 }

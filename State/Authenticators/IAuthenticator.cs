@@ -7,7 +7,8 @@ namespace ContractManagment.Client.State.Authenticators
     {
         LoginUserModel CurrentUser { get; }
         bool IsLoggedIn { get; }
-        Task<bool> Login(string username, string password);
+        bool Login(string username, string password);
         void Logout();
+        LoginUserModel TokenCheck(string token);
     }
 }

@@ -1,14 +1,23 @@
 ﻿using ContractManagment.Client.Commands;
 using ContractManagment.Client.Core;
-using ContractManagment.Client.MVVM.View;
 using ContractManagment.Client.State.Authenticators;
-using System.Windows;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
+        private bool isRemember;
+        public bool IsRemember
+        {
+            get { return isRemember; }
+            set
+            {
+                isRemember = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _login;
         public string Login
         {

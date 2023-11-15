@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContractManagment.Client.MVVM.Model.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,8 +10,10 @@ namespace ContractManagment.Client.State.WebClients
 {
     public interface IWebClient
     {
-        HttpClient client { get; }
-        string Token { get; set; }
-
+        HttpClient Client { get; }
+        string Token { get; }
+        LoginUserModel TokenInfo(string token);
+        LoginUserModel Login(ShortUserModel user);
+        void Logout();
     }
 }
