@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
         <ResourceDictionary>
-            <!--<DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-                <views:LoginView LoginCommand="{Binding LoginCommand}"/>
-            </DataTemplate>-->
             <DataTemplate DataType="{x:Type viewModels:AdminPanelViewModel}">
                 <views:AdminPanelView/>
             </DataTemplate>
