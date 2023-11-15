@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:ContractManagment.Client.MVVM.ViewModel"
              xmlns:views="clr-namespace:ContractManagment.Client.MVVM.View"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
         <ResourceDictionary>

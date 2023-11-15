@@ -29,6 +29,7 @@ namespace ContractManagment.Client.Services.StartServices
                 {
                     _authenticator.TokenCheck(_xmlProvider.Token);
                     window = provider.GetRequiredService<MainWindow>();
+                    ((MainViewModel)window.DataContext).ServiceProvider = provider;
                     window.Show();
                 }
                 catch (Exception ex)

@@ -33,7 +33,7 @@ namespace ContractManagment.Client.State.Authenticators
         }
 
 
-        public bool Login(string username, string password)
+        public async Task<bool> Login(string username, string password)
         {
             try
             {
@@ -51,12 +51,14 @@ namespace ContractManagment.Client.State.Authenticators
             }
         }
 
-        public void Logout()
+        public async Task<bool> Logout()
         {
-            throw new NotImplementedException();
+            CurrentUser = null;
+            await _webClient.Logout();
+            return true;
         }
 
-        public LoginUserModel TokenCheck(string token)
+        public async Task<LoginUserModel> TokenCheck(string token)
         {
             LoginUserModel loginUser = _webClient.TokenInfo(token);
             CurrentUser = loginUser;

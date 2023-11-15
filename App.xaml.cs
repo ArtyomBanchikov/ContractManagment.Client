@@ -9,6 +9,8 @@ using ContractManagment.Client.State.WebClients;
 using ContractManagment.Client.State.WebClients.ModelClients;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net.Http;
+using System.Net.Sockets;
 using System.Windows;
 
 namespace ContractManagment.Client
@@ -23,6 +25,11 @@ namespace ContractManagment.Client
             IServiceProvider serviceProvider = CreateServiceProvider();
             IStartService startService = serviceProvider.GetRequiredService<IStartService>();
             startService.Start(serviceProvider);
+            //MainViewModel mainVM = serviceProvider.GetRequiredService<MainViewModel>();
+            //mainVM.Panel = new AdminPanelViewModel();
+            //mainVM.CurrentUser = new LoginUserModel { Name = "test", Role = "admin" };
+            //Window window = new MainWindow(mainVM);
+            //window.Show();
             base.OnStartup(e);
         }
         private IServiceProvider CreateServiceProvider()
@@ -40,6 +47,22 @@ namespace ContractManagment.Client
             services.AddSingleton<LoginView>();
             services.AddScoped<IStartService, StartService>();
             return services.BuildServiceProvider();
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            if(e.Exception.InnerException != null)
+            {
+                if(e.Exception.InnerException is SocketException || e.Exception.InnerException is HttpRequestException)
+                {
+                    MessageBox.Show("Не удалось подключиться к серверу");
+                }
+            }
+            else
+            {
+                MessageBox.Show(e.Exception.Message);
+            }
+            e.Handled = true;
         }
     }
 }

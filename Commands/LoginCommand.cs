@@ -1,6 +1,7 @@
 ﻿using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.State.Authenticators;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.Commands
@@ -25,7 +26,7 @@ namespace ContractManagment.Client.Commands
 
         public async void Execute(object parameter)
         {
-            bool succes = _authenticator.Login(_loginVM.Login, parameter.ToString());
+            Task<bool> succes = _authenticator.Login(_loginVM.Login, parameter.ToString());
         }
     }
 }

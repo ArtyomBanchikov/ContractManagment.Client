@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace ContractManagment.Client.State.WebClients
@@ -35,9 +36,11 @@ namespace ContractManagment.Client.State.WebClients
             return loginUser;
         }
 
-        public void Logout()
+        public async Task<bool> Logout()
         {
-            throw new NotImplementedException();
+            var response = await Client.GetAsync("/logout");
+            Client.DefaultRequestHeaders.Clear();
+            return true;
         }
 
         public LoginUserModel TokenInfo(string token)
