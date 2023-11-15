@@ -23,7 +23,7 @@
                                 <TextBlock Text="{TemplateBinding Property=Content}"
                                            Height="30"
                                            VerticalAlignment="Center"
-                                           Margin="25,10,0,0"
+                                           Margin="20,10,0,0"
                                            FontSize="15"
                                            Foreground="#E6F3F5"
                                            FontWeight="SemiBold"/>
