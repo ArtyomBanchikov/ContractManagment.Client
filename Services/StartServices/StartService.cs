@@ -1,9 +1,7 @@
-﻿using ContractManagment.Client.MVVM.View;
-using ContractManagment.Client.MVVM.ViewModel;
+﻿using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.MVVM.View.Factories;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
-using ContractManagment.Client.State.Navigators;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
 
@@ -20,31 +18,29 @@ namespace ContractManagment.Client.Services.StartServices
             _authenticator = authenticator;
         }
 
-        public void Start(IServiceProvider provider)
+        public void Start()
         {
             Window window;
             if (_xmlProvider.IsRemember)
             {
                 try
                 {
-                    _authenticator.TokenCheck(_xmlProvider.Token);
-                    window = provider.GetRequiredService<MainWindow>();
-                    ((MainViewModel)window.DataContext).ServiceProvider = provider;
+                    LoginUserModel loginUser = _authenticator.TokenCheck(_xmlProvider.Token).Result;
+                    window = MainWindowFactory.Window;
                     window.Show();
                 }
                 catch (Exception ex)
                 {
-                    window = provider.GetRequiredService<LoginView>();
-                    ((LoginView)window).ServiceProvider = provider;
-                    MessageBox.Show(ex.Message);
+                    window = LoginWindowFactory.Window;
+                    window.Show();
+                    throw ex;
                 }
             }
             else
             {
-                window = provider.GetRequiredService<LoginView>();
-                ((LoginView)window).ServiceProvider = provider;
+                window = LoginWindowFactory.Window;
+                window.Show();
             }
-            window.Show();
         }
     }
 }
