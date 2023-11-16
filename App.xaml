@@ -13,6 +13,24 @@
             <DataTemplate DataType="{x:Type viewModels:UserPanelViewModel}">
                 <views:UserPanelView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ClientsViewModel}">
+                <views:ClientsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ContractsViewModel}">
+                <views:ContractsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:HistoryViewModel}">
+                <views:HistoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:KeysViewModel}">
+                <views:KeysView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RequestsViewModel}">
+                <views:RequestsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
+                <views:UsersView/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
