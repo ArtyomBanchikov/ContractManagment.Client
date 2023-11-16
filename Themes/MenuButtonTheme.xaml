@@ -15,8 +15,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Border CornerRadius="17"
-                                Margin="4"
+                        <Border CornerRadius="16"
+                                Margin="3"
                                 Background="{TemplateBinding Background}">
                             <Grid VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch">

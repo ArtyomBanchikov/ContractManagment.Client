@@ -18,6 +18,8 @@
                          Style="{StaticResource MenuButtonTheme}"/>
             <RadioButton Content="Заявки"
                          Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="Клиенты"
+                         Style="{StaticResource MenuButtonTheme}"/>
         </StackPanel>
     </Grid>
 </UserControl>

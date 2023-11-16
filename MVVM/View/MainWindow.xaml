@@ -17,12 +17,14 @@
         </Grid.RowDefinitions>
         <ContentControl Grid.Column="1"
                         Grid.RowSpan="2"
-                        Content="{Binding Navigator.CurrentViewModel}"/>
+                        Content="{Binding Navigator.CurrentViewModel}"
+                        Background="#6A6E77"/>
         <ContentControl Grid.Row="0"
                         Grid.Column="0"
                         Content="{Binding Panel}"/>
         <Grid Grid.Row="1"
-              Grid.Column="0">
+              Grid.Column="0"
+              Background="#54565E">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0.2*"/>

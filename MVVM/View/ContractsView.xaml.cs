@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ContractManagment.Client.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для KeyView.xaml
+    /// Логика взаимодействия для ContractsView.xaml
     /// </summary>
-    public partial class KeyView : UserControl
+    public partial class ContractsView : UserControl
     {
-        public KeyView()
+        public ContractsView()
         {
             InitializeComponent();
         }

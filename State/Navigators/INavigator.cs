@@ -10,9 +10,12 @@ namespace ContractManagment.Client.State.Navigators
 {
     public enum ViewType
     {
-        Contract,
-        User,
-        Key
+        Contracts,
+        Users,
+        Keys,
+        Clients,
+        Requests,
+        History
     }
     public interface INavigator
     {
