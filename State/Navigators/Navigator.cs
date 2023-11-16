@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ContractManagment.Client.State.Navigators
 {
-    public class Navigator : ObservableObject, INavigator
+    public class Navigator : INavigator, INotifyPropertyChanged
     {
         public ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -19,10 +19,16 @@ namespace ContractManagment.Client.State.Navigators
             set
             {
                 _currentViewModel = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommandAsync(this);
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

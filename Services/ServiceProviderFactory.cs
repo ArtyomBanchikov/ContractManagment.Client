@@ -28,10 +28,12 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
-            //services.AddSingleton<MainViewModel>();
-            //services.AddSingleton<MainWindow>();
-            //services.AddSingleton<LoginViewModel>();
-            //services.AddTransient<LoginView>();
+            services.AddSingleton<ClientsViewModel>();
+            services.AddSingleton<ContractsViewModel>();
+            services.AddSingleton<HistoryViewModel>();
+            services.AddSingleton<KeysViewModel>();
+            services.AddSingleton<RequestsViewModel>();
+            services.AddSingleton<UsersViewModel>();
             services.AddScoped<IStartService, StartService>();
             ServiceProvider = services.BuildServiceProvider();
         }
