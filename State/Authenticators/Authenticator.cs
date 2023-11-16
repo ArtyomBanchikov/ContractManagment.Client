@@ -35,32 +35,20 @@ namespace ContractManagment.Client.State.Authenticators
 
         public async Task<bool> Login(string username, string password)
         {
-            try
-            {
-                ShortUserModel loginUser = new() { Name = username, Password = password };
-                CurrentUser = _webClient.Login(loginUser);
-                return true;
-            }
-            catch(SocketException ex)
-            {
-                throw ex;
-            }
-            catch
-            {
-                return false;
-            }
+            ShortUserModel loginUser = new() { Name = username, Password = password };
+            CurrentUser = await _webClient.Login(loginUser);
+            return false;
         }
 
-        public async Task<bool> Logout()
+        public void Logout()
         {
             CurrentUser = null;
-            await _webClient.Logout();
-            return true;
+            _webClient.Logout();
         }
 
         public async Task<LoginUserModel> TokenCheck(string token)
         {
-            LoginUserModel loginUser = _webClient.TokenInfo(token);
+            LoginUserModel loginUser = await _webClient.TokenInfo(token);
             CurrentUser = loginUser;
             return loginUser;
         }

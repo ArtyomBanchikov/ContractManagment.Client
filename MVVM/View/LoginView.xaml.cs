@@ -1,13 +1,11 @@
-﻿using ContractManagment.Client.MVVM.ViewModel;
+﻿using ContractManagment.Client.MVVM.View.Factories;
+using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.Services;
 using ContractManagment.Client.Services.XmlServices;
-using ContractManagment.Client.State;
 using ContractManagment.Client.State.Authenticators;
-using ContractManagment.Client.State.Navigators;
 using Microsoft.AspNet.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Net.Sockets;
-using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,7 +20,6 @@ namespace ContractManagment.Client.MVVM.View
         private IAuthenticator _authenticator;
         private IPasswordHasher passwordHasher;
         private IXmlService _xmlProvider;
-        public IServiceProvider ServiceProvider { get; set; }
         public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, IXmlService xmlProvider)
         {
             DataContext = viewModel;
@@ -33,7 +30,7 @@ namespace ContractManagment.Client.MVVM.View
             InitializeComponent();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private async void Login_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(LoginBox.Text))
             {
@@ -62,7 +59,8 @@ namespace ContractManagment.Client.MVVM.View
                             _xmlProvider.IsRemember=false;
                             _xmlProvider.Token = "";
                         }
-                        MainWindow window = ServiceProvider.GetRequiredService<MainWindow>();
+                        MainWindow window = MainWindowFactory.NewWindow();
+
                         window.Show();
                         Close();
                     }

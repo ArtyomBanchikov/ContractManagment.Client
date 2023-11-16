@@ -29,11 +29,11 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Vertical">
-                <Label Content="{Binding CurrentUser.Name}"
+                <Label Content="{Binding Authenticator.CurrentUser.Name}"
                        Foreground="#E6F3F5"
                        FontSize="16"
                        Margin="10,0,0,-5"/>
-                <Label Content="{Binding CurrentUser.Role}"
+                <Label Content="{Binding Authenticator.CurrentUser.Role}"
                        Foreground="#A8ACAD"
                        FontSize="13"
                        Margin="10,-5,0,0"/>

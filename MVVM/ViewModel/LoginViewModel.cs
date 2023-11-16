@@ -33,7 +33,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
 
         public LoginViewModel(IAuthenticator authenticator)
         {
-            LoginCommand = new LoginCommand(authenticator, this);
+            LoginCommand = new LoginCommandAsync(authenticator, this);
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using ContractManagment.Client.Commands;
 using ContractManagment.Client.Core;
 using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.Services;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,6 @@ namespace ContractManagment.Client.MVVM.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private IXmlService _xmlService;
-        public IServiceProvider ServiceProvider { get; set; }
         private object _panel;
         public object Panel
         {
@@ -27,11 +27,19 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public ICommand LogoutCommand { get; set; }
+        private ICommand _logoutCommand;
+        public ICommand LogoutCommand
+        {
+            get { return _logoutCommand; }
+            set
+            {
+                _logoutCommand = value;
+                OnPropertyChanged();
+            }
+        }
         public IAuthenticator Authenticator { get; set; }
         public INavigator Navigator { get; set; }
         private LoginUserModel _currentUser;
-
         public LoginUserModel CurrentUser
         {
             get { return _currentUser; }
@@ -41,10 +49,8 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public MainViewModel(IAuthenticator authenticator, INavigator navigator, IXmlService xmlService)
+        public MainViewModel(IAuthenticator authenticator, INavigator navigator)
         {
-            _xmlService = xmlService;
             Navigator = navigator;
             Authenticator = authenticator;
             if (Authenticator.IsLoggedIn)
@@ -58,7 +64,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
                     Panel = new AdminPanelViewModel();
                 }
             }
-            LogoutCommand = new LogoutCommandAsync(authenticator, _xmlService, ServiceProvider);
+            LogoutCommand = new LogoutCommand(authenticator, ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>());
         }
     }
 }
