@@ -67,22 +67,33 @@ namespace ContractManagment.Client.Services.XmlServices
             get
             {
                 XElement userInfo = _userDoc.Element("userinfo");
+                string token = userInfo.Element("Token").Value;
 
-                byte[] encodedBytes = userInfo.Element("Token").Value.InByteArray();
-                byte[] plaintextBytes = ProtectedData.Unprotect(encodedBytes, null, DataProtectionScope.CurrentUser);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    byte[] encodedBytes = token.InByteArray();
+                    byte[] plaintextBytes = ProtectedData.Unprotect(encodedBytes, null, DataProtectionScope.CurrentUser);
 
-                return plaintextBytes.ToHexString();
+                    return plaintextBytes.ToHexString();
+                }
+                else
+                    return token;
             }
             set
             {
                 XElement userInfo = _userDoc.Element("userinfo");
                 XElement token = userInfo.Element("Token");
 
-                byte[] plaintextBytes = value.ToByteArray();
-                byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    byte[] plaintextBytes = value.ToByteArray();
+                    byte[] encodedBytes = ProtectedData.Protect(plaintextBytes, null, DataProtectionScope.CurrentUser);
 
-                token.Value = encodedBytes.InString();
-
+                    token.Value = encodedBytes.InString();
+                }
+                else
+                    token.Value = "";
+                
                 _userDoc.Save("UserInfo.xml");
              }
         }
