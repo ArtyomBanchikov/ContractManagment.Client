@@ -12,8 +12,8 @@ namespace ContractManagment.Client.State.WebClients
     {
         HttpClient Client { get; }
         string Token { get; }
-        LoginUserModel TokenInfo(string token);
-        LoginUserModel Login(ShortUserModel user);
+        Task<LoginUserModel> TokenInfo(string token);
+        Task<LoginUserModel> Login(ShortUserModel user);
         void Logout();
     }
 }

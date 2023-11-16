@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\exit_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
@@ -16,6 +20,10 @@
   <ItemGroup>
     <Folder Include="MVVM\Model\Client\" />
     <Folder Include="MVVM\Model\Post\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\exit_icon.png" />
   </ItemGroup>
 
   <ItemGroup>

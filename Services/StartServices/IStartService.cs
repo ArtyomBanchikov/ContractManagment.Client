@@ -4,6 +4,6 @@ namespace ContractManagment.Client.Services.StartServices
 {
     public interface IStartService
     {
-        void Start(IServiceProvider provider);
+        void Start();
     }
 }

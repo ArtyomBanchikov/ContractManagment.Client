@@ -3,17 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:ContractManagment.Client.MVVM.ViewModel"
              xmlns:views="clr-namespace:ContractManagment.Client.MVVM.View"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
         <ResourceDictionary>
-            <!--<DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
-                <views:LoginView LoginCommand="{Binding LoginCommand}"/>
-            </DataTemplate>-->
             <DataTemplate DataType="{x:Type viewModels:AdminPanelViewModel}">
                 <views:AdminPanelView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:UserPanelViewModel}">
                 <views:UserPanelView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ClientsViewModel}">
+                <views:ClientsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ContractsViewModel}">
+                <views:ContractsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:HistoryViewModel}">
+                <views:HistoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:KeysViewModel}">
+                <views:KeysView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RequestsViewModel}">
+                <views:RequestsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:UsersViewModel}">
+                <views:UsersView/>
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>

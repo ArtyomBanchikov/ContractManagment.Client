@@ -1,12 +1,17 @@
-﻿using ContractManagment.Client.Core;
+﻿using ContractManagment.Client.Commands;
+using ContractManagment.Client.Core;
 using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.Services;
+using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
 {
@@ -22,10 +27,19 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+        private ICommand _logoutCommand;
+        public ICommand LogoutCommand
+        {
+            get { return _logoutCommand; }
+            set
+            {
+                _logoutCommand = value;
+                OnPropertyChanged();
+            }
+        }
         public IAuthenticator Authenticator { get; set; }
         public INavigator Navigator { get; set; }
         private LoginUserModel _currentUser;
-
         public LoginUserModel CurrentUser
         {
             get { return _currentUser; }
@@ -35,7 +49,6 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public MainViewModel(IAuthenticator authenticator, INavigator navigator)
         {
             Navigator = navigator;
@@ -51,7 +64,8 @@ namespace ContractManagment.Client.MVVM.ViewModel
                     Panel = new AdminPanelViewModel();
                 }
             }
-
+            LogoutCommand = new LogoutCommand(authenticator, ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>());
+            navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ContractsViewModel>();
         }
     }
 }

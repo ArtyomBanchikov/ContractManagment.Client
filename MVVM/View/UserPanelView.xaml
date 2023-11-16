@@ -4,9 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ContractManagment.Client.MVVM.View"
+             xmlns:nav="clr-namespace:ContractManagment.Client.State.Navigators"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <StackPanel>
+            <RadioButton Content="Документы"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.Contracts}"/>
+            <RadioButton Content="История"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.History}"/>
+            <RadioButton Content="Заявки"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.Requests}"/>
+            <RadioButton Content="Клиенты"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.Clients}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

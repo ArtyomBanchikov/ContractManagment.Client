@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace ContractManagment.Client.State.WebClients
@@ -26,10 +27,11 @@ namespace ContractManagment.Client.State.WebClients
             Client.BaseAddress = new Uri(xmlProvider.ServerAddress);
         }
 
-        public LoginUserModel Login(ShortUserModel user)
+        public async Task<LoginUserModel> Login(ShortUserModel user)
         {
-            var response = Client.PostAsJsonAsync($"/login", user).Result;
-            LoginUserModel loginUser = response.Content.ReadFromJsonAsync<LoginUserModel>().Result;
+            //var response = Client.PostAsJsonAsync($"/login", user).Result;
+            //LoginUserModel loginUser = response.Content.ReadFromJsonAsync<LoginUserModel>().Result;
+            LoginUserModel loginUser = await Client.PostAsJsonAsync("/login", user).Result.Content.ReadFromJsonAsync<LoginUserModel>();
             if (loginUser != null)
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginUser.Token);
             return loginUser;
@@ -37,29 +39,14 @@ namespace ContractManagment.Client.State.WebClients
 
         public void Logout()
         {
-            throw new NotImplementedException();
+            Client.DefaultRequestHeaders.Clear();
         }
 
-        public LoginUserModel TokenInfo(string token)
+        public async Task<LoginUserModel> TokenInfo(string token)
         {
-            try
-            {
-                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                LoginUserModel user = Client.GetFromJsonAsync<LoginUserModel>($"/userinfo/").Result;
-                return user;
-            }
-            catch (Exception ex) when (ex.InnerException.Message == "Response status code does not indicate success: 404 (Not Found).")
-            {
-                throw new Exception("Ранее сохранённый пользователь больше не действителен");
-            }
-            catch (Exception ex) when (ex.InnerException.Message == "Response status code does not indicate success: 401 (Unauthorized).")
-            {
-                throw new Exception("Срок авторизации истёк");
-            }
-            catch
-            {
-                throw new Exception("Не удалось подключиться к серверу");
-            }
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            LoginUserModel user = Client.GetFromJsonAsync<LoginUserModel>($"/userinfo/").Result;
+            return user;
         }
     }
 }
