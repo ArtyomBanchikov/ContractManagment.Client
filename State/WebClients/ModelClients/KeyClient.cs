@@ -15,14 +15,14 @@ namespace ContractManagment.Client.State.WebClients.ModelClients
             _webClient = webClient;
         }
 
-        public Task Create(KeyModel obj)
+        public async Task Create(KeyModel obj)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.PostAsJsonAsync("/Key", obj);
         }
 
-        public Task DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.DeleteAsync($"/Key/{id}");
         }
 
         public async Task<List<KeyModel>> GetAll()

@@ -7,10 +7,10 @@ using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
 {
-    public class UsersViewModel : ViewModelBase
+    public class UserViewModel : ViewModelBase
     {
         public ICommand UpdateCurrentViewModel {  get; set; }
-        public UsersViewModel()
+        public UserViewModel()
         {
             UpdateCurrentViewModel = new UpdateCurrentViewModelCommandAsync(ServiceProviderFactory.ServiceProvider.GetRequiredService<INavigator>());
         }

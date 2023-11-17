@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ContractManagment.Client.MVVM.View"
+             xmlns:nav="clr-namespace:ContractManagment.Client.State.Navigators"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -16,8 +17,9 @@
                   Grid.Row="0"
                   Background="#646770"
                   BorderThickness="0"
-                  ItemContainerStyle="{StaticResource KeyCardTheme}">
-        </ListView>
+                  ItemContainerStyle="{StaticResource KeyCardTheme}"
+                  SelectedItem="{Binding SelectedKey}"/>
+
         <Grid Background="Transparent"
               Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -29,7 +31,8 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Cursor="Hand"
-                    Margin="5">
+                    Margin="5"
+                    Command="{Binding RefreshKeyCommand}">
                 <Image Source="/Icons/refresh_icon.png"/>
                 <Button.Style>
                     <Style TargetType="Button">
@@ -52,10 +55,12 @@
             <Button Content="Удалить"
                     Grid.Column="1"
                     Style="{StaticResource DeleteButtonTheme}"
-                    IsEnabled="True"/>
+                    Command="{Binding DeleteKeyCommand}"/>
+            
             <Button Content="Добавить"
                     Grid.Column="0"
-                    Style="{StaticResource AddButtonTheme}"/>
+                    Style="{StaticResource AddButtonTheme}"
+                    Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.NewKey}"/>
         </Grid>
     </Grid>
 </UserControl>

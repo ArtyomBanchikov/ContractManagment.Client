@@ -65,7 +65,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 }
             }
             LogoutCommand = new LogoutCommand(authenticator, ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>());
-            navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ContractsViewModel>();
+            navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ContractViewModel>();
         }
     }
 }
