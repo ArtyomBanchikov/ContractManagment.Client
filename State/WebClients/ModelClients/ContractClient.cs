@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContractManagment.Client.State.WebClients.ModelClients
 {
-    public class ContractClient
+    internal class ContractClient
     {
     }
 }
