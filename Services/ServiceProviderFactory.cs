@@ -13,6 +13,7 @@ using ContractManagment.Client.State.WebClients.ModelClients.Client;
 using ContractManagment.Client.MVVM.Model.Post;
 using ContractManagment.Client.State.WebClients.ModelClients.Post;
 using ContractManagment.Client.MVVM.Model;
+using ContractManagment.Client.Services.DialogServices;
 
 namespace ContractManagment.Client.Services
 {
@@ -44,6 +45,7 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<RequestViewModel>();
             services.AddSingleton<UserViewModel>();
             services.AddScoped<IStartService, StartService>();
+            services.AddTransient<IDialogService, DialogService>();
             ServiceProvider = services.BuildServiceProvider();
         }
     }
