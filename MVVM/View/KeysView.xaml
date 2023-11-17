@@ -7,6 +7,55 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label>Ключи</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ListView ItemsSource="{Binding Keys}"
+                  Grid.Row="0"
+                  Background="#646770"
+                  BorderThickness="0"
+                  ItemContainerStyle="{StaticResource KeyCardTheme}">
+        </ListView>
+        <Grid Background="Transparent"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="2"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Margin="5">
+                <Image Source="/Icons/refresh_icon.png"/>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button Content="Удалить"
+                    Grid.Column="1"
+                    Style="{StaticResource DeleteButtonTheme}"
+                    IsEnabled="True"/>
+            <Button Content="Добавить"
+                    Grid.Column="0"
+                    Style="{StaticResource AddButtonTheme}"/>
+        </Grid>
     </Grid>
 </UserControl>
