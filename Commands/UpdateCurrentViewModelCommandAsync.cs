@@ -29,6 +29,13 @@ namespace ContractManagment.Client.Commands
                 {
                     case ViewType.Contracts:
                         _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ContractViewModel>();
+                        if (((ContractViewModel)_navigator.CurrentViewModel).Contracts == null)
+                        {
+                            IReadWriteClient<ContractModel> contractClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<ContractModel>>();
+                            ((ContractViewModel)_navigator.CurrentViewModel).Contracts = new ObservableCollection<ContractModel>();
+                            List<ContractModel> contracts = await contractClient.GetAll();
+                            contracts.ForEach(contract => ((ContractViewModel)_navigator.CurrentViewModel).Contracts.Add(contract));
+                        }
                         break;
 
                     case ViewType.Users:
