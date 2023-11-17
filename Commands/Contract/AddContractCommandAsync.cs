@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContractManagment.Client.Commands.Contract
 {
-    public class GenerateContractCommand : AsyncBaseCommand
+    public class AddContractCommandAsync : AsyncBaseCommand
     {
         protected async override Task ExecuteAsync(object parameter)
         {
