@@ -8,8 +8,9 @@
         mc:Ignorable="d"
         Height="350" Width="250"
         Title="LoginView">
-    <Grid Background="#5C5F68">
-        <Grid.RowDefinitions>
+    <!--<Grid Background="#5C5F68">-->
+    <Grid Background="#787C87">
+            <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -20,12 +21,11 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0"
-               Margin="7"
                Content="Авторизация"
                VerticalAlignment="Center"
                HorizontalAlignment="Center"
-               FontSize="17"
-               FontWeight="Bold"
+               FontSize="19"
+               FontWeight="SemiBold"
                Foreground="#E5E5E5"/>
 
         <Label Grid.Row="1" 
@@ -33,6 +33,7 @@
                Content="Логин" 
                Foreground="#E5E5E5"
                FontWeight="DemiBold"
+               FontSize="15"
                VerticalAlignment="Center"/>
 
         <TextBox x:Name="LoginBox"
@@ -48,6 +49,7 @@
         <Label Grid.Row="3"
                Margin="7"
                Content="Пароль"
+               FontSize="15"
                Foreground="#E5E5E5"
                FontWeight="DemiBold"
                VerticalAlignment="Center"/>
@@ -67,11 +69,13 @@
                   Content="Запомнить меня"
                   FontWeight="DemiBold"
                   Grid.Row="5"
+                  FontSize="15"
                   VerticalAlignment="Center"/>
 
         <Button Grid.Row="6"
                 Content="Войти"
                 Margin="7"
+                FontSize="15"
                 Click="Login_Click">
 
             <Button.Style>

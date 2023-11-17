@@ -13,13 +13,11 @@ namespace ContractManagment.Client.Commands
     {
         private readonly IAuthenticator _authenticator;
         private readonly IXmlService _xmlService;
-        //private readonly IServiceProvider _serviceProvider;
 
         public LogoutCommand(IAuthenticator authenticator, IXmlService xmlService)
         {
             _authenticator = authenticator;
             _xmlService = xmlService;
-            //_serviceProvider = serviceProvider;
         }
 
         public event EventHandler? CanExecuteChanged;

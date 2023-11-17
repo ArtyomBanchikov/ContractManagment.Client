@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContractManagment.Client.MVVM.ViewModel
 {
-    public class KeysViewModel : ViewModelBase
+    public class ContractViewModel : ViewModelBase
     {
     }
 }
