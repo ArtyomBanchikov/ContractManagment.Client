@@ -61,10 +61,17 @@ namespace ContractManagment.Client.Commands
                             ((UserViewModel)_navigator.CurrentViewModel).Users = new ObservableCollection<UserModel>();
                             List<UserModel> users = await userClient.GetAll();
                             string currentUserName = ServiceProviderFactory.ServiceProvider.GetRequiredService<IAuthenticator>().CurrentUser.Name;
-                            users.Remove(users.Find(u => u.Name == currentUserName));
-                            users.ForEach(u => ((UserViewModel)_navigator.CurrentViewModel).Users.Add(u));
+                            foreach(UserModel user in users)
+                            {
+                                if (user.Name != currentUserName)
+                                    ((UserViewModel)_navigator.CurrentViewModel).Users.Add(user);
+                            }
                         }
                         _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<UserViewModel>();
+                        break;
+
+                    case ViewType.NewUser:
+                        _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<NewUserViewModel>();
                         break;
 
                     case ViewType.Keys:
