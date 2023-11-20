@@ -1,8 +1,10 @@
 ﻿using ContractManagment.Client.MVVM.Model;
 using ContractManagment.Client.MVVM.Model.Client;
+using ContractManagment.Client.MVVM.Model.User;
 using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.MVVM.ViewModel.Contract;
 using ContractManagment.Client.Services;
+using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
 using ContractManagment.Client.State.WebClients;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Input;
 
 namespace ContractManagment.Client.Commands
 {
@@ -51,6 +54,16 @@ namespace ContractManagment.Client.Commands
                             break;
                         }
                     case ViewType.Users:
+                        _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<UserViewModel>();
+                        if(((UserViewModel)_navigator.CurrentViewModel).Users == null)
+                        {
+                            IReadWriteClient<UserModel> userClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<UserModel>>();
+                            ((UserViewModel)_navigator.CurrentViewModel).Users = new ObservableCollection<UserModel>();
+                            List<UserModel> users = await userClient.GetAll();
+                            string currentUserName = ServiceProviderFactory.ServiceProvider.GetRequiredService<IAuthenticator>().CurrentUser.Name;
+                            users.Remove(users.Find(u => u.Name == currentUserName));
+                            users.ForEach(u => ((UserViewModel)_navigator.CurrentViewModel).Users.Add(u));
+                        }
                         _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<UserViewModel>();
                         break;
 

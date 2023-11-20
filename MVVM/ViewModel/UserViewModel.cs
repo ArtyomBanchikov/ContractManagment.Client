@@ -16,7 +16,6 @@ namespace ContractManagment.Client.MVVM.ViewModel
         public UserViewModel()
         {
             UpdateCurrentViewModel = new UpdateCurrentViewModelCommandAsync(ServiceProviderFactory.ServiceProvider.GetRequiredService<INavigator>());
-            Users = new ObservableCollection<UserModel>();
         }
     }
 }
