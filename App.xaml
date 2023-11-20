@@ -55,6 +55,8 @@
                 <ResourceDictionary Source="Themes/KeyRecordCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ContractCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ContractComboBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/UserCardTheme.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
