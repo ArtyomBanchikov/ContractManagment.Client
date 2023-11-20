@@ -28,7 +28,8 @@
                     Grid.Column="1"
                     Style="{StaticResource DeleteButtonTheme}"/>
             <Button Grid.Column="2"
-                    Style="{StaticResource ImageButtonTheme}">
+                    Style="{StaticResource ImageButtonTheme}"
+                    Command="{Binding RefreshUserCommand}">
                 <Image Source="/Icons/refresh_icon.png"/>
             </Button>
         </Grid>
