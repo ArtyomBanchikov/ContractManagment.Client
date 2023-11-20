@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +11,13 @@ namespace ContractManagment.Client.State.WebClients.ModelClients
 {
     public class ContractKeyClient : IReadWriteClient<ContractKeyModel>
     {
+        private IWebClient _webClient;
+
+        public ContractKeyClient(IWebClient webClient)
+        {
+            _webClient = webClient;
+        }
+
         public Task Create(ContractKeyModel obj)
         {
             throw new NotImplementedException();
@@ -19,9 +28,10 @@ namespace ContractManagment.Client.State.WebClients.ModelClients
             throw new NotImplementedException();
         }
 
-        public Task<List<ContractKeyModel>> GetAll()
+        public async Task<List<ContractKeyModel>> GetAll()
         {
-            throw new NotImplementedException();
+            List<ContractKeyModel> list = await _webClient.Client.GetFromJsonAsync<List<ContractKeyModel>>("/ContractKey");
+            return list;
         }
 
         public Task<ContractKeyModel> GetById(int id)

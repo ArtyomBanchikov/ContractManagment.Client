@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,19 +11,27 @@ namespace ContractManagment.Client.State.WebClients.ModelClients
 {
     public class ContractClient : IReadWriteClient<ContractModel>
     {
-        public Task Create(ContractModel obj)
+        private IWebClient _webClient;
+
+        public ContractClient(IWebClient webClient)
         {
-            throw new NotImplementedException();
+            _webClient = webClient;
         }
 
-        public Task DeleteById(int id)
+        public async Task Create(ContractModel obj)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.PostAsJsonAsync("/Contract", obj);
         }
 
-        public Task<List<ContractModel>> GetAll()
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.DeleteAsync($"/Contract/{id}");
+        }
+
+        public async Task<List<ContractModel>> GetAll()
+        {
+            List<ContractModel> list = await _webClient.Client.GetFromJsonAsync<List<ContractModel>>("/Contract");
+            return list;
         }
 
         public Task<ContractModel> GetById(int id)

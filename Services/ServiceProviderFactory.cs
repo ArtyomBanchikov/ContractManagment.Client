@@ -13,6 +13,8 @@ using ContractManagment.Client.State.WebClients.ModelClients.Client;
 using ContractManagment.Client.MVVM.Model.Post;
 using ContractManagment.Client.State.WebClients.ModelClients.Post;
 using ContractManagment.Client.MVVM.Model;
+using ContractManagment.Client.Services.DialogServices;
+using ContractManagment.Client.MVVM.ViewModel.Contract;
 
 namespace ContractManagment.Client.Services
 {
@@ -38,12 +40,14 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<IAuthenticator, Authenticator>();
             services.AddSingleton<ClientViewModel>();
             services.AddSingleton<ContractViewModel>();
+            services.AddSingleton<NewContractViewModel>();
             services.AddSingleton<HistoryViewModel>();
             services.AddSingleton<KeyViewModel>();
             services.AddSingleton<NewKeyViewModel>();
             services.AddSingleton<RequestViewModel>();
             services.AddSingleton<UserViewModel>();
             services.AddScoped<IStartService, StartService>();
+            services.AddSingleton<IDialogService, DialogService>();
             ServiceProvider = services.BuildServiceProvider();
         }
     }

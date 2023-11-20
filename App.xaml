@@ -2,7 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:ContractManagment.Client.MVVM.ViewModel"
+             xmlns:contractVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.Contract"
              xmlns:views="clr-namespace:ContractManagment.Client.MVVM.View"
+             xmlns:contractViews="clr-namespace:ContractManagment.Client.MVVM.View.Contract"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
@@ -16,8 +18,8 @@
             <DataTemplate DataType="{x:Type viewModels:ClientViewModel}">
                 <views:ClientsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ContractViewModel}">
-                <views:ContractsView/>
+            <DataTemplate DataType="{x:Type contractVMs:ContractViewModel}">
+                <contractViews:ContractsView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:HistoryViewModel}">
                 <views:HistoryView/>
@@ -34,11 +36,25 @@
             <DataTemplate DataType="{x:Type viewModels:NewKeyViewModel}">
                 <views:NewKeyView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type contractVMs:NewContractViewModel}">
+                <contractViews:NewContractView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type contractVMs:ContractAdminButtonPanelViewModel}">
+                <contractViews:ContractAdminButtonPanelView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type contractVMs:ContractUserButtonPanelViewModel}">
+                <contractViews:ContractUserButtonPanelView/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/KeyCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/DeleteButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/AddButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/FindedKeyCardTheme.xaml"/>
+                <ResourceDictionary Source="Themes/ImageButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/KeyRecordCardTheme.xaml"/>
+                <ResourceDictionary Source="Themes/ContractCardTheme.xaml"/>
+                <ResourceDictionary Source="Themes/ContractComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
