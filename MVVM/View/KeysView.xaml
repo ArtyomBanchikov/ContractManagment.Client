@@ -32,26 +32,11 @@
                     BorderThickness="0"
                     Cursor="Hand"
                     Margin="5"
-                    Command="{Binding RefreshKeyCommand}">
+                    Command="{Binding RefreshKeyCommand}"
+                    Style="{StaticResource ImageButtonTheme}">
                 <Image Source="/Icons/refresh_icon.png"/>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Transparent"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center"
-                              VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
             </Button>
+            
             <Button Content="Удалить"
                     Grid.Column="1"
                     Style="{StaticResource DeleteButtonTheme}"
