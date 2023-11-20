@@ -7,6 +7,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label>Пользователи</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0"
+                  ItemsSource="{Binding Users}"
+                  Background="#646770"
+                  ItemContainerStyle="{StaticResource UserCardTheme}"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Добавить"
+                    Grid.Column="0"
+                    Style="{StaticResource AddButtonTheme}"/>
+            <Button Content="Удалить"
+                    Grid.Column="1"
+                    Style="{StaticResource DeleteButtonTheme}"/>
+            <Button Grid.Column="2"
+                    Style="{StaticResource ImageButtonTheme}">
+                <Image Source="/Icons/refresh_icon.png"/>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
