@@ -46,6 +46,7 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<NewKeyViewModel>();
             services.AddSingleton<RequestViewModel>();
             services.AddSingleton<UserViewModel>();
+            services.AddTransient<NewUserViewModel>();
             services.AddScoped<IStartService, StartService>();
             services.AddSingleton<IDialogService, DialogService>();
             ServiceProvider = services.BuildServiceProvider();

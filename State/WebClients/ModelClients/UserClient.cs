@@ -1,25 +1,34 @@
 ﻿using ContractManagment.Client.MVVM.Model.User;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace ContractManagment.Client.State.WebClients.ModelClients
 {
     public class UserClient : IReadWriteClient<UserModel>
     {
-        public Task Create(UserModel obj)
+        private IWebClient _webClient;
+
+        public UserClient(IWebClient webClient)
         {
-            throw new NotImplementedException();
+            _webClient = webClient;
         }
 
-        public Task DeleteById(int id)
+        public async Task Create(UserModel obj)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.PostAsJsonAsync("/User", obj);
         }
 
-        public Task<List<UserModel>> GetAll()
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.DeleteAsync($"/User/{id}");
+        }
+
+        public async Task<List<UserModel>> GetAll()
+        {
+            List<UserModel> list = await _webClient.Client.GetFromJsonAsync<List<UserModel>>("/User");
+            return list;
         }
 
         public Task<UserModel> GetById(int id)

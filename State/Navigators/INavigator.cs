@@ -17,7 +17,8 @@ namespace ContractManagment.Client.State.Navigators
         Requests,
         History,
         NewKey,
-        NewContract
+        NewContract,
+        NewUser
     }
     public interface INavigator
     {
