@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContractManagment.Client.MVVM.View
+namespace ContractManagment.Client.MVVM.View.Contract
 {
     /// <summary>
-    /// Логика взаимодействия для NewContractView.xaml
+    /// Логика взаимодействия для ContractAdminButtonPanel.xaml
     /// </summary>
-    public partial class NewContractView : UserControl
+    public partial class ContractAdminButtonPanelView : UserControl
     {
-        public NewContractView()
+        public ContractAdminButtonPanelView()
         {
             InitializeComponent();
         }

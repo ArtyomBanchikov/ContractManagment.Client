@@ -1,6 +1,7 @@
 ﻿using ContractManagment.Client.MVVM.Model;
 using ContractManagment.Client.MVVM.Model.Client;
 using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.MVVM.ViewModel.Contract;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.Navigators;
 using ContractManagment.Client.State.WebClients;
@@ -33,11 +34,22 @@ namespace ContractManagment.Client.Commands
                         {
                             IReadWriteClient<ContractModel> contractClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<ContractModel>>();
                             ((ContractViewModel)_navigator.CurrentViewModel).Contracts = new ObservableCollection<ContractModel>();
+                            ((ContractViewModel)_navigator.CurrentViewModel).ContractsNames = new ObservableCollection<string>();
                             List<ContractModel> contracts = await contractClient.GetAll();
                             contracts.ForEach(contract => ((ContractViewModel)_navigator.CurrentViewModel).Contracts.Add(contract));
+                            contracts.ForEach(contract => ((ContractViewModel)_navigator.CurrentViewModel).ContractsNames.Add(contract.Name));
                         }
                         break;
 
+                    case ViewType.NewContract:
+                        {
+                            _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<NewContractViewModel>();
+                            IReadWriteClient<KeyModel> keyClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<KeyModel>>();
+                            ((NewContractViewModel)_navigator.CurrentViewModel).Keys = new ObservableCollection<KeyModel>();
+                            List<KeyModel> keys = await keyClient.GetAll();
+                            keys.ForEach(key => ((NewContractViewModel)_navigator.CurrentViewModel).Keys.Add(key));
+                            break;
+                        }
                     case ViewType.Users:
                         _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<UserViewModel>();
                         break;
