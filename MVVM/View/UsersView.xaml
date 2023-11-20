@@ -15,7 +15,8 @@
         <ListView Grid.Row="0"
                   ItemsSource="{Binding Users}"
                   Background="#646770"
-                  ItemContainerStyle="{StaticResource UserCardTheme}"/>
+                  ItemContainerStyle="{StaticResource UserCardTheme}"
+                  SelectedItem="{Binding SelectedUser}"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -28,7 +29,8 @@
                     Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.NewUser}"/>
             <Button Content="Удалить"
                     Grid.Column="1"
-                    Style="{StaticResource DeleteButtonTheme}"/>
+                    Style="{StaticResource DeleteButtonTheme}"
+                    Command="{Binding DeleteUserCommand}"/>
             <Button Grid.Column="2"
                     Style="{StaticResource ImageButtonTheme}"
                     Command="{Binding RefreshUserCommand}">
