@@ -22,7 +22,7 @@ namespace ContractManagment.Client.State.WebClients.ModelClients
 
         public async Task DeleteById(int id)
         {
-            await _webClient.Client.DeleteAsync($"/Key/{id}");
+            await _webClient.Client.DeleteAsync($"/User/{id}");
         }
 
         public async Task<List<UserModel>> GetAll()

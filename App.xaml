@@ -33,6 +33,9 @@
             <DataTemplate DataType="{x:Type viewModels:UserViewModel}">
                 <views:UsersView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:NewUserViewModel}">
+                <views:NewUserView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:NewKeyViewModel}">
                 <views:NewKeyView/>
             </DataTemplate>
@@ -55,8 +58,8 @@
                 <ResourceDictionary Source="Themes/KeyRecordCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ContractCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ContractComboBoxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/RoleComboBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/UserCardTheme.xaml"/>
-                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
