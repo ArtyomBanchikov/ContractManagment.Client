@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Height="350" Width="250"
         Title="LoginView">
-    <!--<Grid Background="#5C5F68">-->
-    <Grid Background="#787C87">
+    <Grid Background="#646770">
             <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -26,12 +25,12 @@
                HorizontalAlignment="Center"
                FontSize="19"
                FontWeight="SemiBold"
-               Foreground="#E5E5E5"/>
+               Foreground="#E6F3F5"/>
 
         <Label Grid.Row="1" 
                Margin="7"
                Content="Логин" 
-               Foreground="#E5E5E5"
+               Foreground="#E6F3F5"
                FontWeight="DemiBold"
                FontSize="15"
                VerticalAlignment="Center"/>
@@ -39,8 +38,9 @@
         <TextBox x:Name="LoginBox"
                  Grid.Row="2" 
                  Margin="7"
+                 BorderThickness="0"
                  Background="#3D3F44"
-                 Foreground="#E5E5E5"
+                 Foreground="#E6F3F5"
                  FontWeight="DemiBold"
                  Text="{Binding Login}" 
                  VerticalAlignment="Center"
@@ -50,22 +50,23 @@
                Margin="7"
                Content="Пароль"
                FontSize="15"
-               Foreground="#E5E5E5"
+               Foreground="#E6F3F5"
                FontWeight="DemiBold"
                VerticalAlignment="Center"/>
 
         <PasswordBox x:Name="password_box"
                      Margin="7"
+                     BorderThickness="0"
                      Grid.Row="4"
                      Background="#3D3F44"
-                     Foreground="#E5E5E5"
+                     Foreground="#E6F3F5"
                      FontWeight="DemiBold"
                      VerticalAlignment="Center"
                      Height="25"/>
 
         <CheckBox x:Name="RememberCheck"
                   Margin="7"
-                  Foreground="#E5E5E5"
+                  Foreground="#E6F3F5"
                   Content="Запомнить меня"
                   FontWeight="DemiBold"
                   Grid.Row="5"
@@ -76,16 +77,18 @@
                 Content="Войти"
                 Margin="7"
                 FontSize="15"
+                FontWeight="DemiBold"
                 Click="Login_Click">
 
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="#A0A0A0"/>
+                    <Setter Property="Foreground" Value="#E6F3F5"/>
+                    <Setter Property="Background" Value="#767984"/>
                     <Setter Property="Cursor" Value="Hand"/>
 
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#B7B7B7"/>
+                            <Setter Property="Background" Value="#898D99"/>
                         </Trigger>
                     </Style.Triggers>
 

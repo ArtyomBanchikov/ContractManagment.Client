@@ -34,7 +34,7 @@
                                    FontWeight="DemiBold"/>
                             
                             <Label Content="{Binding Role}"
-                                   Grid.Column="1"
+                                   Grid.Column="2"
                                    Foreground="#E6F3F5"
                                    FontSize="13"
                                    FontWeight="DemiBold"/>

@@ -6,11 +6,6 @@ using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
@@ -65,7 +60,6 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 }
             }
             LogoutCommand = new LogoutCommand(authenticator, ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>());
-            //navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ContractViewModel>();
         }
     }
 }
