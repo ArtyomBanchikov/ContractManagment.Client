@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,14 +10,22 @@ namespace ContractManagment.Client.State.WebClients.ModelClients.Client
 {
     public class ClientClient : IReadClient<ClientModel>
     {
-        public Task<List<ClientModel>> GetAll()
+        private IWebClient _webClient;
+
+        public ClientClient(IWebClient webClient)
         {
-            throw new NotImplementedException();
+            _webClient = webClient;
         }
 
-        public Task<ClientModel> GetById(int id)
+        public async Task<List<ClientModel>> GetAll()
         {
-            throw new NotImplementedException();
+            List<ClientModel> list = await _webClient.Client.GetFromJsonAsync<List<ClientModel>>("/Client");
+            return list;
+        }
+
+        public async Task<ClientModel> GetById(int account)
+        {
+            return await _webClient.Client.GetFromJsonAsync<ClientModel>($"/Client/{account}");
         }
     }
 }

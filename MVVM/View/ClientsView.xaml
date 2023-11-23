@@ -7,6 +7,48 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label>Клиенты</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.35*" MinWidth="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Номер счёта"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   Foreground="#E6F3F5"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+            <TextBox Grid.Column="1"
+                     x:Name="SearchTextBox"
+                     Text="{Binding AccountSearch}"
+                     FontSize="14"
+                     FontWeight="DemiBold"
+                     BorderThickness="0"
+                     Foreground="#E6F3F5"
+                     Background="#44464C"
+                     VerticalAlignment="Center"
+                     Height="30"
+                     Margin="5,0,5,0"/>
+            <Button Content="Поиск"
+                    Grid.Column="2"
+                    Style="{StaticResource AddButtonTheme}"
+                    Command="{Binding ClientSearchCommand}"/>
+        </Grid>
+        <ListView Grid.Row="1"
+                  ItemContainerStyle="{StaticResource RecordKeyCardTheme}"
+                  Background="#646770"
+                  BorderThickness="0"
+                  ItemsSource="{Binding RecordKeys}"/>
+        <Button Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Content="Экспортировать"
+                Style="{StaticResource AddButtonTheme}"
+                Command="{Binding ExprotToContractCommand}"/>
     </Grid>
 </UserControl>

@@ -8,6 +8,7 @@ using ContractManagment.Client.Services;
 using ContractManagment.Client.Services.DialogServices;
 using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
+using ContractManagment.Client.State.WebClients;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,13 @@ namespace ContractManagment.Client.MVVM.ViewModel.Contract
 {
     public class ContractViewModel : ViewModelBase
     {
-        private IDialogService _dialogService;
+        public ObservableCollection<RecordKeyModel> AllKeys { get; set; }
         public ObservableCollection<ContractModel> Contracts { get; set; }
         public ObservableCollection<string> ContractsNames { get; set; }
         public ObservableCollection<RecordKeyModel> RecordKeys { get; set; }
+        public ObservableCollection<KeyModel> Keys { get; set; }
         public ICommand SelectContractCommand { get; set; }
-
+        public bool ComboboxChangedTrigger { get; set; }
         private ViewModelBase _buttonPanel;
         public ViewModelBase ButtonPanel
         {
@@ -64,11 +66,12 @@ namespace ContractManagment.Client.MVVM.ViewModel.Contract
             }
         }
 
-        public ContractViewModel(IDialogService dialogService, IAuthenticator authenticator)
+        public ContractViewModel(IAuthenticator authenticator, IReadWriteClient<ContractModel> contractClient)
         {
-            _dialogService = dialogService;
             SelectContractCommand = new SelectContractCommandAsync(this);
             RecordKeys = new ObservableCollection<RecordKeyModel>();
+            AllKeys = new ObservableCollection<RecordKeyModel>();
+            ComboboxChangedTrigger = true;
             if(authenticator.IsLoggedIn)
             {
                 if(authenticator.CurrentUser.Role == "admin")

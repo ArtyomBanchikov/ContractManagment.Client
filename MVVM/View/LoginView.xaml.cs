@@ -46,7 +46,7 @@ namespace ContractManagment.Client.MVVM.View
             {
                 if (LoginCommand != null)
                 {
-                    LoginCommand.Execute(passwordHasher.HashPassword(password_box.Password));
+                    LoginCommand.Execute(password_box.Password);
                     if (_authenticator != null && _authenticator.IsLoggedIn)
                     {
                         if ((bool)RememberCheck.IsChecked)
@@ -62,10 +62,8 @@ namespace ContractManagment.Client.MVVM.View
                         MainWindow window = MainWindowFactory.NewWindow();
 
                         window.Show();
-                        Close();
+                        this.Close();
                     }
-                    else
-                        MessageBox.Show("Неправильный пароль или имя пользователя");
                 }
             }
         }

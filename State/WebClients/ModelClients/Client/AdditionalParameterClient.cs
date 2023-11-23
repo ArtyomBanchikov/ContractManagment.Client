@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,17 @@ namespace ContractManagment.Client.State.WebClients.ModelClients.Client
 {
     public class AdditionalParameterClient : IReadClient<AdditionalParameterModel>
     {
-        public Task<List<AdditionalParameterModel>> GetAll()
+        private IWebClient _webClient;
+
+        public AdditionalParameterClient(IWebClient webClient)
         {
-            throw new NotImplementedException();
+            _webClient = webClient;
+        }
+
+        public async Task<List<AdditionalParameterModel>> GetAll()
+        {
+            List<AdditionalParameterModel> list = await _webClient.Client.GetFromJsonAsync<List<AdditionalParameterModel>>("/AdditionalParameter");
+            return list;
         }
 
         public Task<AdditionalParameterModel> GetById(int id)

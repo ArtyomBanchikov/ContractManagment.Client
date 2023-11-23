@@ -30,6 +30,8 @@ namespace ContractManagment.Client.Commands.User
             {
                 IReadWriteClient<UserModel> userClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<UserModel>>();
                 UserModel newUser = new UserModel { Name = _newUserVM.Name, Role = _newUserVM.Role, Password = parameter.ToString() };
+                if(!string.IsNullOrEmpty(_newUserVM.FIO))
+                    newUser.FIO = _newUserVM.FIO;
                 await userClient.Create(newUser);
                 INavigator navigator = ServiceProviderFactory.ServiceProvider.GetRequiredService<INavigator>();
                 navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<UserViewModel>();

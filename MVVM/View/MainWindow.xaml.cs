@@ -26,5 +26,6 @@ namespace ContractManagment.Client
             DataContext = viewModel;
             InitializeComponent();
         }
+
     }
 }

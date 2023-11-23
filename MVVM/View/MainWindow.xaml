@@ -27,10 +27,12 @@
               Background="#54565E">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
                 <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="0">
                 <Label Content="{Binding Authenticator.CurrentUser.Name}"
                        Foreground="#E6F3F5"
                        FontSize="16"
@@ -41,7 +43,7 @@
                        Margin="10,-5,0,0"/>
             </StackPanel>
             <Button Command="{Binding LogoutCommand}"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Background="Transparent"
                     BorderThickness="0"
                     Cursor="Hand">

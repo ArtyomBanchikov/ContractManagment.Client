@@ -12,7 +12,7 @@ namespace ContractManagment.Client.MVVM.Model.Client
         public int ClientId { get; set; }
         public ClientModel Client { get; set; }
         public int ParamId { get; set; }
-        public AdditionalParameterModel Parameter { get; set; }
+        public AdditionalParameterModel? Parameter { get; set; }
         public string Value { get; set; }
     }
 }

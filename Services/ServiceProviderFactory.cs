@@ -15,6 +15,8 @@ using ContractManagment.Client.State.WebClients.ModelClients.Post;
 using ContractManagment.Client.MVVM.Model;
 using ContractManagment.Client.Services.DialogServices;
 using ContractManagment.Client.MVVM.ViewModel.Contract;
+using ContractManagment.Client.MVVM.Model.Records;
+using ContractManagment.Client.State.WebClients.ModelClients.Record;
 
 namespace ContractManagment.Client.Services
 {
@@ -36,15 +38,17 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<IReadWriteClient<ContractKeyModel>, ContractKeyClient>();
             services.AddSingleton<IReadWriteClient<KeyModel>, KeyClient>();
             services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
+            services.AddSingleton<IReadWriteClient<RecordModel>, RecordClient>();
+            services.AddSingleton<IReadWriteClient<RecordKeyModel>, RecordKeyClient>();
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
             services.AddSingleton<ClientViewModel>();
             services.AddSingleton<ContractViewModel>();
             services.AddSingleton<NewContractViewModel>();
-            services.AddSingleton<HistoryViewModel>();
+            services.AddSingleton<RecordsViewModel>();
+            services.AddSingleton<RecordViewModel>();
             services.AddSingleton<KeyViewModel>();
             services.AddSingleton<NewKeyViewModel>();
-            services.AddSingleton<RequestViewModel>();
             services.AddSingleton<UserViewModel>();
             services.AddTransient<NewUserViewModel>();
             services.AddScoped<IStartService, StartService>();

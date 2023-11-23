@@ -26,9 +26,9 @@ namespace ContractManagment.Client.MVVM.View.Contract
             InitializeComponent();
         }
 
-        private async void Contracts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Contracts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(DataContext != null)
+            if(DataContext != null && ((ContractViewModel)DataContext).ComboboxChangedTrigger)
             {
                 ((ContractViewModel)DataContext).SelectContractCommand.Execute(this);
             }
