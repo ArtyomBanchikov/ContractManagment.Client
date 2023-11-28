@@ -45,7 +45,8 @@
                      VerticalAlignment="Center"
                      Padding="5"
                      FontWeight="DemiBold"
-                     Text="{Binding Key}"/>
+                     Text="{Binding Key}"
+                     KeyDown="KeyTextBox_KeyDown"/>
 
             <Label Content="Расшифровка"
                    VerticalAlignment="Center"

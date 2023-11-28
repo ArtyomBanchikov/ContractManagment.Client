@@ -37,7 +37,8 @@
                  Text="{Binding Name}"
                  Height="26"
                  BorderThickness="0"
-                 VerticalAlignment="Center"/>
+                 VerticalAlignment="Center"
+                 KeyDown="NameTextBox_KeyDown"/>
 
         <Label Content="Имя пользователя"
                Grid.Row="1"
@@ -56,7 +57,8 @@
                  Text="{Binding FIO}"
                  Height="26"
                  BorderThickness="0"
-                 VerticalAlignment="Center"/>
+                 VerticalAlignment="Center"
+                 KeyDown="FioTextBox_KeyDown"/>
                  
 
         <Label Content="Роль"
@@ -94,7 +96,8 @@
                      FontWeight="DemiBold"
                      Height="26"
                      BorderThickness="0"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center"
+                     KeyDown="PasswordBox_KeyDown"/>
 
         <Label Content="Подтвердить пароль"
                Grid.Row="4"
