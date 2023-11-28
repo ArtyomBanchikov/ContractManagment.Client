@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -30,8 +27,18 @@ namespace ContractManagment.Client.Commands
         public async void Execute(object parameter)
         {
             IsExecuting = true;
-            await ExecuteAsync(parameter);
-            IsExecuting = false;
+            try
+            {
+                await ExecuteAsync(parameter);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                IsExecuting = false;
+            }
         }
 
         protected abstract Task ExecuteAsync(object parameter);
