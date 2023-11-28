@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace ContractManagment.Client.MVVM.Model.Client
+namespace ContractManagment.Client.MVVM.Model.ClientInternet
 {
-    public class ClientModel
+    public class ClientInternetModel
     {
         public int Id { get; set; }
         public string FullName { get; set; }
@@ -20,6 +15,6 @@ namespace ContractManagment.Client.MVVM.Model.Client
         public string Building { get; set; }
         public string Street { get; set; }
         public string Floor { get; set; }
-        public List<ClientAddParamModel>? Params { get; set; }
+        public List<ClientInternetAddParamModel>? Params { get; set; }
     }
 }

@@ -8,8 +8,6 @@ using ContractManagment.Client.State.WebClients.ModelClients;
 using ContractManagment.Client.State.WebClients;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using ContractManagment.Client.MVVM.Model.Client;
-using ContractManagment.Client.State.WebClients.ModelClients.Client;
 using ContractManagment.Client.MVVM.Model.Post;
 using ContractManagment.Client.State.WebClients.ModelClients.Post;
 using ContractManagment.Client.MVVM.Model;
@@ -17,6 +15,10 @@ using ContractManagment.Client.Services.DialogServices;
 using ContractManagment.Client.MVVM.ViewModel.Contract;
 using ContractManagment.Client.MVVM.Model.Records;
 using ContractManagment.Client.State.WebClients.ModelClients.Record;
+using ContractManagment.Client.MVVM.Model.ClientInternet;
+using ContractManagment.Client.State.WebClients.ModelClients.ClientInternet;
+using ContractManagment.Client.MVVM.Model.ClientDigital;
+using ContractManagment.Client.State.WebClients.ModelClients.ClientDigital;
 
 namespace ContractManagment.Client.Services
 {
@@ -28,21 +30,34 @@ namespace ContractManagment.Client.Services
         {
             IServiceCollection services = new ServiceCollection();
             services.AddSingleton<IXmlService, XmlService>();
+
             services.AddSingleton<IWebClient, WebClient>();
-            services.AddSingleton<IReadClient<AdditionalParameterModel>, AdditionalParameterClient>();
-            services.AddSingleton<IReadClient<ClientAddParamModel>, ClientAddParamClient>();
-            services.AddSingleton<IReadClient<ClientModel>, ClientClient>();
+
+            services.AddSingleton<IReadClient<InternetAddParamModel>, InternetAddParamClient>();
+            services.AddSingleton<IReadClient<ClientInternetAddParamModel>, ClientInternetAddParamClient>();
+            services.AddSingleton<IReadClient<ClientInternetModel>, ClientInternetClient>();
+
+            services.AddSingleton<IReadClient<DigitalAddParamModel>, DigitalAddParamClient>();
+            services.AddSingleton<IReadClient<ClientDigitalAddParamModel>, ClientDigitalAddParamClient>();
+            services.AddSingleton<IReadClient<ClientDigitalModel>, ClientDigitalClient>();
+
             services.AddSingleton<IReadClient<PostModel>, PostClient>();
             services.AddSingleton<IReadClient<PostMetaModel>, PostMetaClient>();
+
             services.AddSingleton<IReadWriteClient<ContractModel>, ContractClient>();
             services.AddSingleton<IReadWriteClient<ContractKeyModel>, ContractKeyClient>();
             services.AddSingleton<IReadWriteClient<KeyModel>, KeyClient>();
+
             services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
+
             services.AddSingleton<IReadWriteClient<RecordModel>, RecordClient>();
             services.AddSingleton<IReadWriteClient<RecordKeyModel>, RecordKeyClient>();
+
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
-            services.AddSingleton<ClientViewModel>();
+
+            services.AddSingleton<ClientInternetViewModel>();
+            services.AddSingleton<ClientDigitalViewModel>();
             services.AddSingleton<ContractViewModel>();
             services.AddSingleton<NewContractViewModel>();
             services.AddSingleton<RecordsViewModel>();
@@ -51,8 +66,11 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<NewKeyViewModel>();
             services.AddSingleton<UserViewModel>();
             services.AddTransient<NewUserViewModel>();
+
             services.AddScoped<IStartService, StartService>();
+
             services.AddSingleton<IDialogService, DialogService>();
+
             ServiceProvider = services.BuildServiceProvider();
         }
     }

@@ -1,5 +1,4 @@
 ﻿using ContractManagment.Client.MVVM.Model;
-using ContractManagment.Client.MVVM.Model.Client;
 using ContractManagment.Client.MVVM.Model.Post;
 using ContractManagment.Client.MVVM.Model.Records;
 using ContractManagment.Client.MVVM.Model.User;
@@ -92,8 +91,12 @@ namespace ContractManagment.Client.Commands
                         _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<NewKeyViewModel>();
                         break;
 
-                    case ViewType.Clients:
-                        _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ClientViewModel>();
+                    case ViewType.ClientsInternet:
+                        _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ClientInternetViewModel>();
+                        break;
+
+                    case ViewType.ClientsDigital:
+                        _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ClientDigitalViewModel>();
                         break;
 
                     case ViewType.Requests:

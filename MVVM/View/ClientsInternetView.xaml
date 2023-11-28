@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ContractManagment.Client.MVVM.View.ClientsView"
+﻿<UserControl x:Class="ContractManagment.Client.MVVM.View.ClientsInternetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,7 +26,7 @@
                    HorizontalAlignment="Center"/>
             <TextBox Grid.Column="1"
                      x:Name="SearchTextBox"
-                     Text="{Binding AccountSearch}"
+                     Text="{Binding AccountSearch, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="14"
                      FontWeight="DemiBold"
                      BorderThickness="0"
@@ -34,7 +34,11 @@
                      Background="#44464C"
                      VerticalAlignment="Center"
                      Height="30"
-                     Margin="5,0,5,0"/>
+                     Margin="5,0,5,0">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding ClientInternetSearchCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Content="Поиск"
                     Grid.Column="2"
                     Style="{StaticResource AddButtonTheme}"

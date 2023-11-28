@@ -15,8 +15,11 @@
             <DataTemplate DataType="{x:Type viewModels:UserPanelViewModel}">
                 <views:UserPanelView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ClientViewModel}">
-                <views:ClientsView/>
+            <DataTemplate DataType="{x:Type viewModels:ClientInternetViewModel}">
+                <views:ClientsInternetView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ClientDigitalViewModel}">
+                <views:ClientsDigitalView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type contractVMs:ContractViewModel}">
                 <contractViews:ContractsView/>

@@ -1,5 +1,4 @@
-﻿using ContractManagment.Client.MVVM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace ContractManagment.Client.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для ClientsView.xaml
+    /// Логика взаимодействия для ClientsDigitalView.xaml
     /// </summary>
-    public partial class ClientsView : UserControl
+    public partial class ClientsDigitalView : UserControl
     {
-        public ClientsView()
+        public ClientsDigitalView()
         {
             InitializeComponent();
         }

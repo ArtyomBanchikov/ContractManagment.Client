@@ -18,7 +18,11 @@ namespace ContractManagment.Client
             IStartService startService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IStartService>();
             startService.Start();
         }
-
+        protected override void OnExit(ExitEventArgs e)
+        {
+            ContractManagment.Client.Properties.Settings.Default.Save();
+            base.OnExit(e);
+        }
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             Exception exception = e.Exception;
