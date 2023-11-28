@@ -1,15 +1,23 @@
 ﻿using ContractManagment.Client.MVVM.Model.Records;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace ContractManagment.Client.State.WebClients.ModelClients.Record
 {
     public class RecordKeyClient : IReadWriteClient<RecordKeyModel>
     {
-        public Task Create(RecordKeyModel obj)
+        private IWebClient _webClient;
+
+        public RecordKeyClient(IWebClient webClient)
         {
-            throw new NotImplementedException();
+            _webClient = webClient;
+        }
+
+        public async Task Create(RecordKeyModel obj)
+        {
+            await _webClient.Client.PostAsJsonAsync("/RecordKey", obj);
         }
 
         public Task DeleteById(int id)
@@ -17,9 +25,10 @@ namespace ContractManagment.Client.State.WebClients.ModelClients.Record
             throw new NotImplementedException();
         }
 
-        public Task<List<RecordKeyModel>> GetAll()
+        public async Task<List<RecordKeyModel>> GetAll()
         {
-            throw new NotImplementedException();
+            List<RecordKeyModel> list = await _webClient.Client.GetFromJsonAsync<List<RecordKeyModel>>("/RecordKey");
+            return list;
         }
 
         public Task<RecordKeyModel> GetById(int id)

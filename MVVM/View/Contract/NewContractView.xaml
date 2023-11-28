@@ -121,7 +121,6 @@
                       BorderThickness="2"
                       BorderBrush="#54565E"
                       ItemsSource="{Binding UnfindedKeys}"/>
-            
         </Grid>
         
     </Grid>

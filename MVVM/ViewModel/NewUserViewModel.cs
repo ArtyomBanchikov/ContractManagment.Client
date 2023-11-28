@@ -28,6 +28,18 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged(nameof(Role));
             }
         }
+
+        private string _fio;
+        public string FIO
+        {
+            get { return _fio; }
+            set
+            {
+                _fio = value;
+                OnPropertyChanged(nameof(FIO));
+            }
+        }
+
         public ICommand AddUserCommand { get; set; }
         public NewUserViewModel()
         {

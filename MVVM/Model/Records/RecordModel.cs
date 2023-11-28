@@ -7,6 +7,6 @@ namespace ContractManagment.Client.MVVM.Model.Records
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }
-        public List<RecordKeyModel> RecordKeys { get; set; }
+        public List<RecordKeyModel>? RecordKeys { get; set; }
     }
 }

@@ -27,6 +27,18 @@ namespace ContractManagment.Client.Commands.Contract
             ContractModel contract = _contractVM.SelectedContract;
             if(contract !=  null)
             {
+                foreach(RecordKeyModel recordoredKey in _contractVM.RecordKeys)
+                {
+                    if(!string.IsNullOrEmpty(recordoredKey.Value))
+                    {
+                        RecordKeyModel oldRecord = _contractVM.AllKeys.FirstOrDefault(old => old.Key == recordoredKey.Key);
+                        if (oldRecord == null)
+                            _contractVM.AllKeys.Add(recordoredKey);
+                        else
+                            oldRecord.Value = recordoredKey.Value;
+                    }
+                }
+                _contractVM.RecordKeys.Clear();
                 IReadWriteClient<KeyModel> keyClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<KeyModel>>();
                 IReadWriteClient<ContractKeyModel> contractKeyModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<ContractKeyModel>>();
                 List<KeyModel> keys = await keyClient.GetAll();
@@ -36,7 +48,11 @@ namespace ContractManagment.Client.Commands.Contract
                     KeyModel key = keys.FirstOrDefault(k => k.Id == contractKey.KeyId);
                     if (key != null)
                     {
-                        _contractVM.RecordKeys.Add(new RecordKeyModel { Key = key.Key, Name = key.Name });
+                        RecordKeyModel record = new RecordKeyModel { Key = key.Key, Name = key.Name };
+                        RecordKeyModel findedRecorKey = _contractVM.AllKeys.FirstOrDefault(r => r.Key == key.Key);
+                        if(findedRecorKey != null)
+                            record.Value = findedRecorKey.Value;
+                        _contractVM.RecordKeys.Add(record);
                     }
                 }
             }

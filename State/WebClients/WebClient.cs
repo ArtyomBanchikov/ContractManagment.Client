@@ -32,8 +32,13 @@ namespace ContractManagment.Client.State.WebClients
             //var response = Client.PostAsJsonAsync($"/login", user).Result;
             //LoginUserModel loginUser = response.Content.ReadFromJsonAsync<LoginUserModel>().Result;
             LoginUserModel loginUser = await Client.PostAsJsonAsync("/login", user).Result.Content.ReadFromJsonAsync<LoginUserModel>();
-            if (loginUser != null)
+            if (loginUser != null &&
+                loginUser.Name != null &&
+                loginUser.Token != null &&
+                loginUser.Role != null)
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginUser.Token);
+            else
+                throw new Exception("Ошибка авторизации");
             return loginUser;
         }
 

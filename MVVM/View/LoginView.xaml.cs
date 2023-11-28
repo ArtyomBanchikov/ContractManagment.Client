@@ -46,7 +46,7 @@ namespace ContractManagment.Client.MVVM.View
             {
                 if (LoginCommand != null)
                 {
-                    LoginCommand.Execute(passwordHasher.HashPassword(password_box.Password));
+                    LoginCommand.Execute(password_box.Password);
                     if (_authenticator != null && _authenticator.IsLoggedIn)
                     {
                         if ((bool)RememberCheck.IsChecked)
@@ -62,11 +62,34 @@ namespace ContractManagment.Client.MVVM.View
                         MainWindow window = MainWindowFactory.NewWindow();
 
                         window.Show();
-                        Close();
+                        this.Close();
+                        Application.Current.MainWindow = window;
                     }
-                    else
-                        MessageBox.Show("Неправильный пароль или имя пользователя");
                 }
+            }
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void LoginBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                password_box.Focus();
             }
         }
     }

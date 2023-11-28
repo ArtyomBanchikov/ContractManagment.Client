@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ContractManagment.Client.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для RequestsView.xaml
+    /// Логика взаимодействия для RecordView.xaml
     /// </summary>
-    public partial class RequestsView : UserControl
+    public partial class RecordView : UserControl
     {
-        public RequestsView()
+        public RecordView()
         {
             InitializeComponent();
         }

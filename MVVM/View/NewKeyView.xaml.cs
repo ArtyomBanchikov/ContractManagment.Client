@@ -24,5 +24,13 @@ namespace ContractManagment.Client.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void KeyTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                KeyNameTextBox.Focus();
+            }
+        }
     }
 }

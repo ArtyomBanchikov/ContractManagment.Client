@@ -39,7 +39,7 @@ namespace ContractManagment.Client.MVVM.ViewModel.Contract
             set
             {
                 _contractName = value;
-                OnPropertyChanged(nameof(ContractName));
+                OnPropertyChanged();
             }
         }
         public NewContractViewModel()

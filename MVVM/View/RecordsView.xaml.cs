@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ContractManagment.Client.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для HistoryView.xaml
+    /// Логика взаимодействия для RecordsView.xaml
     /// </summary>
-    public partial class HistoryView : UserControl
+    public partial class RecordsView : UserControl
     {
-        public HistoryView()
+        public RecordsView()
         {
             InitializeComponent();
         }

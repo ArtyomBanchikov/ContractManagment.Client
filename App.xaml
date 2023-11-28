@@ -15,20 +15,23 @@
             <DataTemplate DataType="{x:Type viewModels:UserPanelViewModel}">
                 <views:UserPanelView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ClientViewModel}">
-                <views:ClientsView/>
+            <DataTemplate DataType="{x:Type viewModels:ClientInternetViewModel}">
+                <views:ClientsInternetView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:ClientDigitalViewModel}">
+                <views:ClientsDigitalView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type contractVMs:ContractViewModel}">
                 <contractViews:ContractsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:HistoryViewModel}">
-                <views:HistoryView/>
+            <DataTemplate DataType="{x:Type viewModels:RecordsViewModel}">
+                <views:RecordsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RecordViewModel}">
+                <views:RecordView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:KeyViewModel}">
                 <views:KeysView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:RequestViewModel}">
-                <views:RequestsView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:UserViewModel}">
                 <views:UsersView/>
@@ -60,6 +63,8 @@
                 <ResourceDictionary Source="Themes/ContractComboBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/RoleComboBoxTheme.xaml"/>
                 <ResourceDictionary Source="Themes/UserCardTheme.xaml"/>
+                <ResourceDictionary Source="Themes/RecordKeyCardTheme.xaml"/>
+                <ResourceDictionary Source="Themes/RecordCardTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,5 +1,8 @@
 ﻿using ContractManagment.Client.MVVM.Model.Records;
 using ContractManagment.Client.MVVM.ViewModel.Contract;
+using ContractManagment.Client.Services;
+using ContractManagment.Client.State.WebClients;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,13 +36,19 @@ namespace ContractManagment.Client.Commands.Contract
                 File.WriteAllBytes(tmpFile, _contractVM.SelectedContract.Value);
                 word.Document doc = app.Documents.Open(tmpFile);
                 app.Visible = true;
-                foreach (RecordKeyModel key in _contractVM.RecordKeys)
-                {
-                    FindAndReplace(app, $"[{key.Key}]", key.Value);
-                }
                 RecordModel record = new RecordModel();
                 record.Time = DateTime.Now;
-                record.RecordKeys = _contractVM.RecordKeys.ToList();
+                record.RecordKeys = new List<RecordKeyModel>();
+                foreach (RecordKeyModel key in _contractVM.RecordKeys)
+                {
+                    if(!string.IsNullOrEmpty(key.Value))
+                    {
+                        FindAndReplace(app, $"[{key.Key}]", key.Value);
+                        record.RecordKeys.Add(key);
+                    }
+                }
+                IReadWriteClient<RecordModel> recordClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<RecordModel>>();
+                await recordClient.Create(record);
             }
         }
         private void FindAndReplace(word.Application doc, object findText, object replaceWithText)

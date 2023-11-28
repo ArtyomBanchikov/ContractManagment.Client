@@ -16,10 +16,11 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Label Content="Имя пользователя"
+        <Label Content="Логин"
                Grid.Row="0"
                Grid.Column="0"
                Foreground="#E6F3F5"
@@ -36,16 +37,39 @@
                  Text="{Binding Name}"
                  Height="26"
                  BorderThickness="0"
-                 VerticalAlignment="Center"/>
+                 VerticalAlignment="Center"
+                 KeyDown="NameTextBox_KeyDown"/>
 
-        <Label Content="Роль"
+        <Label Content="Имя пользователя"
                Grid.Row="1"
                Grid.Column="0"
                Foreground="#E6F3F5"
                FontSize="14"
                FontWeight="DemiBold"
                VerticalAlignment="Center"/>
-        <ComboBox Style="{DynamicResource RoleComboBoxTheme}" Grid.Row="1"
+        <TextBox x:Name="FioTextBox"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Foreground="#E6F3F5"
+                 Background="#44464C"
+                 FontSize="14"
+                 FontWeight="DemiBold"
+                 Text="{Binding FIO}"
+                 Height="26"
+                 BorderThickness="0"
+                 VerticalAlignment="Center"
+                 KeyDown="FioTextBox_KeyDown"/>
+                 
+
+        <Label Content="Роль"
+               Grid.Row="2"
+               Grid.Column="0"
+               Foreground="#E6F3F5"
+               FontSize="14"
+               FontWeight="DemiBold"
+               VerticalAlignment="Center"/>
+        <ComboBox Style="{DynamicResource RoleComboBoxTheme}"
+                  Grid.Row="2"
                   Grid.Column="1"
                   SelectedItem="{Binding Role}"
                   ItemsSource="{Binding Roles}"
@@ -57,14 +81,14 @@
                   FontWeight="SemiBold"/>
 
         <Label Content="Пароль"
-               Grid.Row="2"
+               Grid.Row="3"
                Grid.Column="0"
                Foreground="#E6F3F5"
                FontSize="14"
                FontWeight="DemiBold"
                VerticalAlignment="Center"/>
         <PasswordBox x:Name="PasswordBox"
-                     Grid.Row="2"
+                     Grid.Row="3"
                      Grid.Column="1"
                      Foreground="#E6F3F5"
                      Background="#44464C"
@@ -72,17 +96,18 @@
                      FontWeight="DemiBold"
                      Height="26"
                      BorderThickness="0"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center"
+                     KeyDown="PasswordBox_KeyDown"/>
 
         <Label Content="Подтвердить пароль"
-               Grid.Row="3"
+               Grid.Row="4"
                Grid.Column="0"
                Foreground="#E6F3F5"
                FontSize="14"
                FontWeight="DemiBold"
                VerticalAlignment="Center"/>
         <PasswordBox x:Name="ConfirmPasswordBox"
-                     Grid.Row="3"
+                     Grid.Row="4"
                      Grid.Column="1"
                      Foreground="#E6F3F5"
                      Background="#44464C"
@@ -95,7 +120,7 @@
         <Button Content="Добавить"
                 Style="{StaticResource AddButtonTheme}"
                 Click="AddUserButton_Click"
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.ColumnSpan="3"
                 FontSize="14"
                 FontWeight="DemiBold"/>

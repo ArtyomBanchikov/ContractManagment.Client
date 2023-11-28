@@ -1,9 +1,4 @@
 ﻿using ContractManagment.Client.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.State.Navigators
@@ -13,7 +8,8 @@ namespace ContractManagment.Client.State.Navigators
         Contracts,
         Users,
         Keys,
-        Clients,
+        ClientsInternet,
+        ClientsDigital,
         Requests,
         History,
         NewKey,

@@ -35,9 +35,9 @@ namespace ContractManagment.Client.Commands.Key
             {
                 MessageBox.Show("Введите расшифровку ключа");
             }
-            else if (newKey.Name.Contains(' ') || newKey.Key.Contains(' '))
+            else if (newKey.Key.Contains(' '))
             {
-                MessageBox.Show("Некорректный ввод");
+                MessageBox.Show("Некорректный ввод ключа");
             }
             else
             {

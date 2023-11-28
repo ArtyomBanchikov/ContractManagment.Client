@@ -52,5 +52,29 @@ namespace ContractManagment.Client.MVVM.View
                 ((NewUserViewModel)DataContext).AddUserCommand.Execute(_passwordHasher.HashPassword(PasswordBox.Password));
             }
         }
+
+        private void NameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                FioTextBox.Focus();
+            }
+        }
+
+        private void FioTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PasswordBox.Focus();
+            }
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ConfirmPasswordBox.Focus();
+            }
+        }
     }
 }

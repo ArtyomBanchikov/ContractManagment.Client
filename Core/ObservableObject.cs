@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace ContractManagment.Client.Core
 {
-    public class ObservableObject
+    public class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

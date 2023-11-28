@@ -41,6 +41,7 @@ namespace ContractManagment.Client.Services.StartServices
                 window = LoginWindowFactory.Window;
                 window.Show();
             }
+            Application.Current.MainWindow = window;
         }
     }
 }
