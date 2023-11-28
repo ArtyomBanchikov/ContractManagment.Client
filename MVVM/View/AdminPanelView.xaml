@@ -24,9 +24,12 @@
             <RadioButton Content="Заявки"
                          Style="{StaticResource MenuButtonTheme}"
                          Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.Requests}"/>
-            <RadioButton Content="Клиенты биллинга"
+            <RadioButton Content="Биллинг Интернет"
                          Style="{StaticResource MenuButtonTheme}"
-                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.Clients}"/>
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.ClientsInternet}"/>
+            <RadioButton Content="Биллинг Цифра ТВ"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.ClientsDigital}"/>
         </StackPanel>
     </Grid>
 </UserControl>
