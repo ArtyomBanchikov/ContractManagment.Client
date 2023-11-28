@@ -33,6 +33,7 @@ namespace ContractManagment.Client.Commands
             {
                 RecordViewModel recordVM = ServiceProviderFactory.ServiceProvider.GetRequiredService<RecordViewModel>();
                 _navigator.CurrentViewModel = recordVM;
+                recordVM.RecordKeys.Clear();
                 foreach (RecordKeyModel recordKey in _recordsVM.SelectedFullRecord.Record.RecordKeys)
                 {
                     recordVM.RecordKeys.Add(recordKey);
