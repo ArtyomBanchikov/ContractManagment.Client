@@ -5,6 +5,7 @@ using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.Commands
@@ -36,6 +37,7 @@ namespace ContractManagment.Client.Commands
             LoginView loginView = LoginWindowFactory.NewWindow();
             loginView.Show();
             mainWindow.Close();
+            Application.Current.MainWindow = loginView;
         }
     }
 }
