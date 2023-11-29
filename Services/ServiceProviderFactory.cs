@@ -33,10 +33,14 @@ namespace ContractManagment.Client.Services
 
             services.AddSingleton<IWebClient, WebClient>();
 
+            services.AddSingleton<IReadClient<AccountTariffInternetModel>, AccountTariffInternetClient>();
+            services.AddSingleton<IReadClient<TariffInternetModel>, TariffInternetClient>();
             services.AddSingleton<IReadClient<InternetAddParamModel>, InternetAddParamClient>();
             services.AddSingleton<IReadClient<ClientInternetAddParamModel>, ClientInternetAddParamClient>();
             services.AddSingleton<IReadClient<ClientInternetModel>, ClientInternetClient>();
 
+            services.AddSingleton<IReadClient<AccountTariffDigitalModel>, AccountTariffDigitalClient>();
+            services.AddSingleton<IReadClient<TariffDigitalModel>, TariffDigitalClient>();
             services.AddSingleton<IReadClient<DigitalAddParamModel>, DigitalAddParamClient>();
             services.AddSingleton<IReadClient<ClientDigitalAddParamModel>, ClientDigitalAddParamClient>();
             services.AddSingleton<IReadClient<ClientDigitalModel>, ClientDigitalClient>();
