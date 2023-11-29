@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using word = Microsoft.Office.Interop.Word;
@@ -41,11 +39,8 @@ namespace ContractManagment.Client.Commands.Contract
                 record.RecordKeys = new List<RecordKeyModel>();
                 foreach (RecordKeyModel key in _contractVM.RecordKeys)
                 {
-                    if(!string.IsNullOrEmpty(key.Value))
-                    {
-                        FindAndReplace(app, $"[{key.Key}]", key.Value);
-                        record.RecordKeys.Add(key);
-                    }
+                    FindAndReplace(app, $"[{key.Key}]", key.Value);
+                    record.RecordKeys.Add(key);
                 }
                 IReadWriteClient<RecordModel> recordClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<RecordModel>>();
                 await recordClient.Create(record);
@@ -53,7 +48,6 @@ namespace ContractManagment.Client.Commands.Contract
         }
         private void FindAndReplace(word.Application doc, object findText, object replaceWithText)
         {
-            //options
             object matchCase = false;
             object matchWholeWord = true;
             object matchWildCards = false;
@@ -69,7 +63,6 @@ namespace ContractManagment.Client.Commands.Contract
             object visible = true;
             object replace = 2;
             object wrap = 1;
-            //execute find and replace
             doc.Selection.Find.Execute(ref findText, ref matchCase, ref matchWholeWord,
                 ref matchWildCards, ref matchSoundsLike, ref matchAllWordForms, ref forward, ref wrap, ref format, ref replaceWithText, ref replace,
                 ref matchKashida, ref matchDiacritics, ref matchAlefHamza, ref matchControl);
