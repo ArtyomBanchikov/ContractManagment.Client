@@ -42,7 +42,7 @@
             <Button Content="Поиск"
                     Grid.Column="2"
                     Style="{StaticResource AddButtonTheme}"
-                    Command="{Binding ClientSearchCommand}"/>
+                    Command="{Binding ClientInternetSearchCommand}"/>
         </Grid>
         <ListView Grid.Row="1"
                   ItemContainerStyle="{StaticResource RecordKeyCardTheme}"

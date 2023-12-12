@@ -26,7 +26,7 @@ namespace ContractManagment.Client.Commands.Key
 
         protected async override Task ExecuteAsync(object parameter)
         {
-            KeyModel newKey = new KeyModel { Key = _newKeyViewModel.Key, Name = _newKeyViewModel.Name };
+            KeyModel newKey = new KeyModel { Key = _newKeyViewModel.Key.Trim(), Name = _newKeyViewModel.Name.Trim() };
             if (string.IsNullOrEmpty(newKey.Key))
             {
                 MessageBox.Show("Введите ключ");

@@ -1,4 +1,5 @@
 ﻿using ContractManagment.Client.MVVM.Model;
+using ContractManagment.Client.MVVM.Model.FilterParameters;
 using ContractManagment.Client.MVVM.Model.Records;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ContractManagment.Client.State.WebClients.ModelClients.Record
 {
-    public class RecordClient : IReadWriteClient<RecordModel>
+    public class RecordClient : IRecordClient
     {
         private IWebClient _webClient;
 
@@ -28,9 +29,9 @@ namespace ContractManagment.Client.State.WebClients.ModelClients.Record
             throw new NotImplementedException();
         }
 
-        public async Task<List<RecordModel>> GetAll()
+        public async Task<List<LongRecordModel>> GetAll()
         {
-            List<RecordModel> list = await _webClient.Client.GetFromJsonAsync<List<RecordModel>>("/Record");
+            List<LongRecordModel> list = await _webClient.Client.GetFromJsonAsync<List<LongRecordModel>>("/Record");
             return list;
         }
 
@@ -42,6 +43,11 @@ namespace ContractManagment.Client.State.WebClients.ModelClients.Record
         public Task Update(RecordModel obj)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<LongRecordModel>> GetByFilter(string key, string keyValue)
+        {
+            return await _webClient.Client.GetFromJsonAsync<List<LongRecordModel>>($"/Record/{key}/{keyValue}");
         }
     }
 }

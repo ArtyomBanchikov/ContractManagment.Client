@@ -1,11 +1,7 @@
 ﻿using ContractManagment.Client.Core;
 using ContractManagment.Client.MVVM.Model.User;
 using ContractManagment.Client.State.WebClients;
-using System;
-using System.Net.Http;
-using System.Net.Sockets;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace ContractManagment.Client.State.Authenticators
 {

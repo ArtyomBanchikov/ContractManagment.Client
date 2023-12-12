@@ -19,6 +19,7 @@ using ContractManagment.Client.MVVM.Model.ClientInternet;
 using ContractManagment.Client.State.WebClients.ModelClients.ClientInternet;
 using ContractManagment.Client.MVVM.Model.ClientDigital;
 using ContractManagment.Client.State.WebClients.ModelClients.ClientDigital;
+using ContractManagment.Client.MVVM.ViewModel.User;
 
 namespace ContractManagment.Client.Services
 {
@@ -33,15 +34,19 @@ namespace ContractManagment.Client.Services
 
             services.AddSingleton<IWebClient, WebClient>();
 
+            services.AddSingleton<IReadClient<AccountTariffInternetModel>, AccountTariffInternetClient>();
+            services.AddSingleton<IReadClient<TariffInternetModel>, TariffInternetClient>();
             services.AddSingleton<IReadClient<InternetAddParamModel>, InternetAddParamClient>();
             services.AddSingleton<IReadClient<ClientInternetAddParamModel>, ClientInternetAddParamClient>();
             services.AddSingleton<IReadClient<ClientInternetModel>, ClientInternetClient>();
 
+            services.AddSingleton<IReadClient<AccountTariffDigitalModel>, AccountTariffDigitalClient>();
+            services.AddSingleton<IReadClient<TariffDigitalModel>, TariffDigitalClient>();
             services.AddSingleton<IReadClient<DigitalAddParamModel>, DigitalAddParamClient>();
             services.AddSingleton<IReadClient<ClientDigitalAddParamModel>, ClientDigitalAddParamClient>();
             services.AddSingleton<IReadClient<ClientDigitalModel>, ClientDigitalClient>();
 
-            services.AddSingleton<IReadClient<PostModel>, PostClient>();
+            services.AddSingleton<IPostClient, PostClient>();
             services.AddSingleton<IReadClient<PostMetaModel>, PostMetaClient>();
 
             services.AddSingleton<IReadWriteClient<ContractModel>, ContractClient>();
@@ -50,22 +55,25 @@ namespace ContractManagment.Client.Services
 
             services.AddSingleton<IReadWriteClient<UserModel>, UserClient>();
 
-            services.AddSingleton<IReadWriteClient<RecordModel>, RecordClient>();
+            services.AddSingleton<IRecordClient, RecordClient>();
             services.AddSingleton<IReadWriteClient<RecordKeyModel>, RecordKeyClient>();
 
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
 
+            services.AddSingleton<HistoryViewModel>();
+            services.AddSingleton<PostsViewModel>();
             services.AddSingleton<ClientInternetViewModel>();
             services.AddSingleton<ClientDigitalViewModel>();
             services.AddSingleton<ContractViewModel>();
             services.AddSingleton<NewContractViewModel>();
-            services.AddSingleton<RecordsViewModel>();
             services.AddSingleton<RecordViewModel>();
             services.AddSingleton<KeyViewModel>();
             services.AddSingleton<NewKeyViewModel>();
             services.AddSingleton<UserViewModel>();
             services.AddTransient<NewUserViewModel>();
+            services.AddTransient<EditUserViewModel>();
+
 
             services.AddScoped<IStartService, StartService>();
 

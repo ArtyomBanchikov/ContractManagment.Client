@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ContractManagment.Client.MVVM.Model.ClientDigital
 {
@@ -15,6 +16,8 @@ namespace ContractManagment.Client.MVVM.Model.ClientDigital
         public string Building { get; set; }
         public string Street { get; set; }
         public string Floor { get; set; }
+        public string NCamModul { get; set; }
+        public DateTime ConnectDate { get; set; }
         public List<ClientDigitalAddParamModel>? Params { get; set; }
     }
 }

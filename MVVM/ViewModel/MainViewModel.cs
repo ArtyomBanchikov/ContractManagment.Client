@@ -1,6 +1,7 @@
 ﻿using ContractManagment.Client.Commands;
 using ContractManagment.Client.Core;
 using ContractManagment.Client.MVVM.Model.User;
+using ContractManagment.Client.MVVM.ViewModel.Panel;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
@@ -57,6 +58,10 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 else if (Authenticator.CurrentUser.Role == "admin")
                 {
                     Panel = new AdminPanelViewModel();
+                }
+                else if (Authenticator.CurrentUser.Role == "manager")
+                {
+                    Panel = new ManagerPanelViewModel();
                 }
             }
             LogoutCommand = new LogoutCommand(authenticator, ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>());

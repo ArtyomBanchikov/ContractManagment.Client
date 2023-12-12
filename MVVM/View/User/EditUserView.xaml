@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="ContractManagment.Client.MVVM.View.User.EditUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ContractManagment.Client.MVVM.View.User"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.35*"/>
+                <ColumnDefinition Width="0.65*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Label Content="Логин"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Foreground="#E6F3F5"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"/>
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Foreground="#E6F3F5"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   Content="{Binding User.Name}"/>
+
+            <Label Content="Имя пользователя"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Foreground="#E6F3F5"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"/>
+            <TextBox x:Name="FioTextBox"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Foreground="#E6F3F5"
+                     Background="#44464C"
+                     FontSize="14"
+                     FontWeight="DemiBold"
+                     Text="{Binding FIO}"
+                     Height="26"
+                     BorderThickness="0"
+                     VerticalAlignment="Center"
+                     KeyDown="FioTextBox_KeyDown"/>
+
+
+            <Label Content="Роль"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Foreground="#E6F3F5"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"/>
+            <ComboBox Style="{DynamicResource RoleComboBoxTheme}"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      SelectedItem="{Binding Role}"
+                      ItemsSource="{Binding Roles}"
+                      Height="26"
+                      BorderThickness="0"
+                      VerticalAlignment="Center"
+                      Foreground="#E6F3F5"
+                      FontSize="14"
+                      FontWeight="SemiBold"/>
+
+            <Label Content="Пароль"
+                   Grid.Row="3"
+                   Grid.Column="0"
+                   Foreground="#E6F3F5"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"/>
+            <PasswordBox x:Name="PasswordBox"
+                         Grid.Row="3"
+                         Grid.Column="1"
+                         Foreground="#E6F3F5"
+                         Background="#44464C"
+                         FontSize="14"
+                         FontWeight="DemiBold"
+                         Height="26"
+                         BorderThickness="0"
+                         VerticalAlignment="Center"
+                         KeyDown="PasswordBox_KeyDown"/>
+
+            <Label Content="Подтвердить пароль"
+                   Grid.Row="4"
+                   Grid.Column="0"
+                   Foreground="#E6F3F5"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   VerticalAlignment="Center"/>
+            <PasswordBox x:Name="ConfirmPasswordBox"
+                         Grid.Row="4"
+                         Grid.Column="1"
+                         Foreground="#E6F3F5"
+                         Background="#44464C"
+                         FontSize="14"
+                         FontWeight="DemiBold"
+                         Height="26"
+                         BorderThickness="0"
+                         VerticalAlignment="Center"/>
+
+            <Button Content="Обновить"
+                    Style="{StaticResource AddButtonTheme}"
+                    Click="UpdateUserButton_Click"
+                    Grid.Row="6"
+                    Grid.ColumnSpan="3"
+                    FontSize="14"
+                    FontWeight="DemiBold"/>
+        </Grid>
+    </Grid>
+</UserControl>

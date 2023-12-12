@@ -74,7 +74,7 @@ namespace ContractManagment.Client.MVVM.ViewModel.Contract
             ComboboxChangedTrigger = true;
             if(authenticator.IsLoggedIn)
             {
-                if(authenticator.CurrentUser.Role == "admin")
+                if(authenticator.CurrentUser.Role == "admin" || authenticator.CurrentUser.Role == "manager")
                 {
                     ButtonPanel = new ContractAdminButtonPanelViewModel(this);
 

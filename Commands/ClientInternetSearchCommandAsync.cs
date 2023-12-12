@@ -41,8 +41,12 @@ namespace ContractManagment.Client.Commands
                     else
                     {
                         _clientInternetVM.RecordKeys.Clear();
+
                         IReadClient<ClientInternetAddParamModel> clientInternetAddParamClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<ClientInternetAddParamModel>>();
                         IReadClient<InternetAddParamModel> internetAddParamClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<InternetAddParamModel>>();
+                        IReadClient<AccountTariffInternetModel> accountTariffInternetClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<AccountTariffInternetModel>>();
+                        IReadClient<TariffInternetModel> tariffInternetClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<TariffInternetModel>>();
+
                         List<InternetAddParamModel> internetAddParams = await internetAddParamClient.GetAll();
                         List<ClientInternetAddParamModel> clientInternetAddParams = (await clientInternetAddParamClient.GetAll()).Where(param => param.ClientId == clientInternet.Id).ToList();
 
@@ -56,6 +60,17 @@ namespace ContractManagment.Client.Commands
                         _clientInternetVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyInstallPorch", Name = "Подъезд", Value = clientInternet.Entrance });
                         _clientInternetVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyInstallStorey", Name = "Этаж", Value = clientInternet.Floor });
                         _clientInternetVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyInstallApartment", Name = "Квартира установки", Value = clientInternet.Flat });
+                        _clientInternetVM.RecordKeys.Add(new RecordKeyModel { Key = "date-connect", Name = "Дата подключения", Value = DateOnly.FromDateTime(clientInternet.ConnectDate).ToString() });
+
+                        AccountTariffInternetModel accountTariff = (await accountTariffInternetClient.GetAll()).FirstOrDefault(accountTariff => accountTariff.AccountId == clientInternet.Account);
+                        if (accountTariff != null)
+                        {
+                            TariffInternetModel tariffInternet = await tariffInternetClient.GetById(accountTariff.TariffId);
+                            if (tariffInternet != null && tariffInternet.IsDeleted == 0)
+                            {
+                                _clientInternetVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyTariff", Name = "Тариф", Value = tariffInternet.Name });
+                            }
+                        }
 
                         foreach (ClientInternetAddParamModel internetClientParam in clientInternetAddParams)
                         {
