@@ -36,9 +36,9 @@ namespace ContractManagment.Client.State.WebClients.ModelClients
             throw new NotImplementedException();
         }
 
-        public Task Update(UserModel obj)
+        public async Task Update(UserModel obj)
         {
-            throw new NotImplementedException();
+            await _webClient.Client.PutAsJsonAsync("/User",obj);
         }
     }
 }

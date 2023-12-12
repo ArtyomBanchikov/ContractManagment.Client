@@ -3,6 +3,7 @@ using ContractManagment.Client.MVVM.Model.Records;
 using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.WebClients;
+using ContractManagment.Client.State.WebClients.ModelClients.ClientDigital;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -41,8 +42,12 @@ namespace ContractManagment.Client.Commands
                     else
                     {
                         _clientDigitalVM.RecordKeys.Clear();
+
                         IReadClient<ClientDigitalAddParamModel> clientDigitalAddParamClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<ClientDigitalAddParamModel>>();
                         IReadClient<DigitalAddParamModel> digitalAddParamClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<DigitalAddParamModel>>();
+                        IReadClient<AccountTariffDigitalModel> accountTariffDigitalClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<AccountTariffDigitalModel>>();
+                        IReadClient<TariffDigitalModel> tariffDigitalClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadClient<TariffDigitalModel>>();
+
                         List<DigitalAddParamModel> digitalAddParams = await digitalAddParamClient.GetAll();
                         List<ClientDigitalAddParamModel> clientDigitalAddParams = (await clientDigitalAddParamClient.GetAll()).Where(param => param.ClientId == clientDigital.Id).ToList();
 
@@ -56,6 +61,18 @@ namespace ContractManagment.Client.Commands
                         _clientDigitalVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyInstallPorch", Name = "Подъезд", Value = clientDigital.Entrance });
                         _clientDigitalVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyInstallStorey", Name = "Этаж", Value = clientDigital.Floor });
                         _clientDigitalVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyInstallApartment", Name = "Квартира установки", Value = clientDigital.Flat });
+                        _clientDigitalVM.RecordKeys.Add(new RecordKeyModel { Key = "date-connect", Name = "Дата подключения", Value = DateOnly.FromDateTime(clientDigital.ConnectDate).ToString() });
+                        _clientDigitalVM.RecordKeys.Add(new RecordKeyModel { Key = "NcamModul", Name = "номер Кам-модуля", Value = clientDigital.NCamModul });
+
+                        AccountTariffDigitalModel accountTariff = (await accountTariffDigitalClient.GetAll()).FirstOrDefault(accountTariff => accountTariff.AccountId == clientDigital.Account);
+                        if(accountTariff != null)
+                        {
+                            TariffDigitalModel tariffDigital = await tariffDigitalClient.GetById(accountTariff.TariffId);
+                            if(tariffDigital != null && tariffDigital.IsDeleted == 0)
+                            {
+                                _clientDigitalVM.RecordKeys.Add(new RecordKeyModel { Key = "KeyTariff", Name = "Тариф", Value = tariffDigital.Name });
+                            }
+                        }
 
                         foreach (ClientDigitalAddParamModel clientDigitalParam in clientDigitalAddParams)
                         {

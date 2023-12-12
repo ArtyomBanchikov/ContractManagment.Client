@@ -21,17 +21,22 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Button Content="Добавить"
                     Grid.Column="0"
                     Style="{StaticResource AddButtonTheme}"
                     Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.NewUser}"/>
-            <Button Content="Удалить"
+            <Button Content="Редактировать"
                     Grid.Column="1"
+                    Style="{StaticResource AddButtonTheme}"
+                    Command="{Binding EditUserCommand}"/>
+            <Button Content="Удалить"
+                    Grid.Column="2"
                     Style="{StaticResource DeleteButtonTheme}"
                     Command="{Binding DeleteUserCommand}"/>
-            <Button Grid.Column="2"
+            <Button Grid.Column="3"
                     Style="{StaticResource ImageButtonTheme}"
                     Command="{Binding RefreshUserCommand}">
                 <Image Source="/Icons/refresh_icon.png"/>

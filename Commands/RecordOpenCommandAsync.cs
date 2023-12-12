@@ -1,4 +1,5 @@
-﻿using ContractManagment.Client.MVVM.Model.Records;
+﻿using ContractManagment.Client.Core;
+using ContractManagment.Client.MVVM.Model.Records;
 using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.Navigators;
@@ -9,23 +10,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ContractManagment.Client.Commands
 {
-    public class RecordOpenCommandAsync : AsyncBaseCommand
+    public class RecordOpenCommandAsync : ICommand
     {
-        private RecordsViewModel _recordsVM;
+        private RecordsViewModelBase _recordsVM;
         private INavigator _navigator;
 
-        public RecordOpenCommandAsync(RecordsViewModel recordsVM, INavigator navigator)
+        public RecordOpenCommandAsync(RecordsViewModelBase recordsVM, INavigator navigator)
         {
             _navigator = navigator;
             _recordsVM = recordsVM;
         }
 
-        protected override async Task ExecuteAsync(object parameter)
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
         {
-            if(_recordsVM.SelectedFullRecord == null)
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            if (_recordsVM.SelectedFullRecord == null)
             {
                 MessageBox.Show("Выберите элемент из списка");
             }

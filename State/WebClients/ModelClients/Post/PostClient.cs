@@ -2,14 +2,12 @@
 using ContractManagment.Client.MVVM.Model.Records;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ContractManagment.Client.State.WebClients.ModelClients.Post
 {
-    public class PostClient : IReadClient<PostModel>
+    public class PostClient : IPostClient
     {
         private IWebClient _webClient;
 
@@ -18,15 +16,19 @@ namespace ContractManagment.Client.State.WebClients.ModelClients.Post
             _webClient = webClient;
         }
 
-        public async Task<List<PostModel>> GetAll()
+        public async Task<List<LongRecordModel>> GetByFilter(string key, string keyValue)
         {
-            List<PostModel> list = await _webClient.Client.GetFromJsonAsync<List<PostModel>>("/Post");
-            return list;
+            return await _webClient.Client.GetFromJsonAsync<List<LongRecordModel>>($"/Post/{key}/{keyValue}");
         }
 
         public Task<PostModel> GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<LongRecordModel>> GetAll()
+        {
+            return await _webClient.Client.GetFromJsonAsync<List<LongRecordModel>>("/Post");
         }
     }
 }

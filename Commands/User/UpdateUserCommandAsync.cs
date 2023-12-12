@@ -1,5 +1,6 @@
 ﻿using ContractManagment.Client.MVVM.Model.User;
 using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.MVVM.ViewModel.User;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.Navigators;
 using ContractManagment.Client.State.WebClients;
@@ -9,31 +10,36 @@ using System.Windows;
 
 namespace ContractManagment.Client.Commands.User
 {
-    class AddUserCommandAsync : AsyncBaseCommand
+    public class UpdateUserCommandAsync : AsyncBaseCommand
     {
-        private NewUserViewModel _newUserVM;
+        private EditUserViewModel _editUserVM;
 
-        public AddUserCommandAsync(NewUserViewModel newUserVM)
+        public UpdateUserCommandAsync(EditUserViewModel editUserVM)
         {
-            _newUserVM = newUserVM;
+            _editUserVM = editUserVM;
         }
 
         protected override async Task ExecuteAsync(object parameter)
         {
-            if(string.IsNullOrEmpty(_newUserVM.Role))
+            if(string.IsNullOrEmpty(_editUserVM.Role))
             {
                 MessageBox.Show("Выберите роль");
             }
             else
             {
                 IReadWriteClient<UserModel> userClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<UserModel>>();
-                UserModel newUser = new UserModel { Name = _newUserVM.Name, Role = _newUserVM.Role, Password = parameter.ToString() };
-                if(!string.IsNullOrEmpty(_newUserVM.FIO))
-                    newUser.FIO = _newUserVM.FIO;
-                await userClient.Create(newUser);
+                UserModel updateUser = new UserModel { Id = _editUserVM.Id, Name = _editUserVM.Name, Role = _editUserVM.Role };
+                
+                if (parameter is string && !string.IsNullOrEmpty((string)parameter))
+                    updateUser.Password = parameter.ToString();
+                
+                if (!string.IsNullOrEmpty(_editUserVM.FIO))
+                    updateUser.FIO = _editUserVM.FIO;
+
+                await userClient.Update(updateUser);
+
                 INavigator navigator = ServiceProviderFactory.ServiceProvider.GetRequiredService<INavigator>();
                 navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<UserViewModel>();
-                ((UserViewModel)navigator.CurrentViewModel).Users.Add(newUser);
             }
         }
     }

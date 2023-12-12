@@ -5,12 +5,12 @@ using ContractManagment.Client.State.Navigators;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Input;
 
-namespace ContractManagment.Client.MVVM.ViewModel
+namespace ContractManagment.Client.MVVM.ViewModel.Panel
 {
-    public class AdminPanelViewModel : ViewModelBase
+    public class UserPanelViewModel : ViewModelBase
     {
         public ICommand UpdateCurrentViewModel { get; set; }
-        public AdminPanelViewModel()
+        public UserPanelViewModel()
         {
             UpdateCurrentViewModel = new UpdateCurrentViewModelCommandAsync(ServiceProviderFactory.ServiceProvider.GetRequiredService<INavigator>());
         }

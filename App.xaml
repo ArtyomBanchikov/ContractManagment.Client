@@ -3,17 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:ContractManagment.Client.MVVM.ViewModel"
              xmlns:contractVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.Contract"
+             xmlns:panelVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.Panel"
+             xmlns:userVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.User"
              xmlns:views="clr-namespace:ContractManagment.Client.MVVM.View"
              xmlns:contractViews="clr-namespace:ContractManagment.Client.MVVM.View.Contract"
+             xmlns:panelViews="clr-namespace:ContractManagment.Client.MVVM.View.Panel"
+             xmlns:userViews="clr-namespace:ContractManagment.Client.MVVM.View.User"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
         <ResourceDictionary>
-            <DataTemplate DataType="{x:Type viewModels:AdminPanelViewModel}">
-                <views:AdminPanelView/>
+            <DataTemplate DataType="{x:Type panelVMs:AdminPanelViewModel}">
+                <panelViews:AdminPanelView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:UserPanelViewModel}">
-                <views:UserPanelView/>
+            <DataTemplate DataType="{x:Type panelVMs:UserPanelViewModel}">
+                <panelViews:UserPanelView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type panelVMs:ManagerPanelViewModel}">
+                <panelViews:ManagerPanelView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:ClientInternetViewModel}">
                 <views:ClientsInternetView/>
@@ -24,8 +31,11 @@
             <DataTemplate DataType="{x:Type contractVMs:ContractViewModel}">
                 <contractViews:ContractsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:RecordsViewModel}">
-                <views:RecordsView/>
+            <DataTemplate DataType="{x:Type viewModels:HistoryViewModel}">
+                <views:HistoryView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PostsViewModel}">
+                <views:PostsView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:RecordViewModel}">
                 <views:RecordView/>
@@ -38,6 +48,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:NewUserViewModel}">
                 <views:NewUserView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type userVMs:EditUserViewModel}">
+                <userViews:EditUserView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:NewKeyViewModel}">
                 <views:NewKeyView/>

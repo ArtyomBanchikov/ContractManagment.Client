@@ -25,12 +25,14 @@ namespace ContractManagment.Client.MVVM.ViewModel
         public ICommand RefreshUserCommand { get; set; }
         public ICommand UpdateCurrentViewModel {  get; set; }
         public ICommand DeleteUserCommand { get; set; }
+        public ICommand EditUserCommand { get; set; }
         public ObservableCollection<UserModel> Users { get; set; }
         public UserViewModel()
         {
             UpdateCurrentViewModel = new UpdateCurrentViewModelCommandAsync(ServiceProviderFactory.ServiceProvider.GetRequiredService<INavigator>());
             RefreshUserCommand = new RefreshUserCommandAsync(this);
             DeleteUserCommand = new DeleteUserCommandAsync(this);
+            EditUserCommand = new EditUserCommand(this);
         }
     }
 }

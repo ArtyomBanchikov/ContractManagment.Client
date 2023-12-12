@@ -17,7 +17,7 @@ namespace ContractManagment.Client.MVVM.Model.ClientDigital
         public string Street { get; set; }
         public string Floor { get; set; }
         public string NCamModul { get; set; }
-        public DateOnly ConnectDate { get; set; }
+        public DateTime ConnectDate { get; set; }
         public List<ClientDigitalAddParamModel>? Params { get; set; }
     }
 }

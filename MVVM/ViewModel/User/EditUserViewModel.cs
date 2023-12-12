@@ -1,11 +1,12 @@
 ﻿using ContractManagment.Client.Commands.User;
 using ContractManagment.Client.Core;
+using ContractManagment.Client.MVVM.Model.User;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace ContractManagment.Client.MVVM.ViewModel
+namespace ContractManagment.Client.MVVM.ViewModel.User
 {
-    public class NewUserViewModel : ViewModelBase
+    public class EditUserViewModel : ViewModelBase
     {
         public ObservableCollection<string> Roles { get; set; }
         private string _name;
@@ -39,12 +40,14 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged(nameof(FIO));
             }
         }
+        public int Id { get; set; }
+        public UserModel User { get; set; }
+        public ICommand UpdateUserCommand { get; set; }
 
-        public ICommand AddUserCommand { get; set; }
-        public NewUserViewModel()
+        public EditUserViewModel()
         {
-            AddUserCommand = new AddUserCommandAsync(this);
             Roles = new ObservableCollection<string> { "user", "manager", "admin" };
+            UpdateUserCommand = new UpdateUserCommandAsync(this);
         }
     }
 }

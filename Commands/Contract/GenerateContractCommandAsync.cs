@@ -35,11 +35,10 @@ namespace ContractManagment.Client.Commands.Contract
                 word.Document doc = app.Documents.Open(tmpFile);
                 app.Visible = true;
                 RecordModel record = new RecordModel();
-                record.Time = DateTime.Now;
                 record.RecordKeys = new List<RecordKeyModel>();
                 foreach (RecordKeyModel key in _contractVM.RecordKeys)
                 {
-                    FindAndReplace(app, $"[{key.Key}]", key.Value);
+                    FindAndReplace(app, $"[{key.Key}]", key.Value.Trim());
                     record.RecordKeys.Add(key);
                 }
                 IReadWriteClient<RecordModel> recordClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<RecordModel>>();

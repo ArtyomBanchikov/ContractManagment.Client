@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContractManagment.Client.MVVM.View
+namespace ContractManagment.Client.MVVM.View.Panel
 {
     /// <summary>
     /// Логика взаимодействия для AdminPanelView.xaml
