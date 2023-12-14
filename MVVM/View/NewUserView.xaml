@@ -118,7 +118,7 @@
                      VerticalAlignment="Center"/> 
         
         <Button Content="Добавить"
-                Style="{StaticResource AddButtonTheme}"
+                Style="{StaticResource DefaultButtonTheme}"
                 Click="AddUserButton_Click"
                 Grid.Row="6"
                 Grid.ColumnSpan="3"

@@ -26,11 +26,11 @@
             </Grid.ColumnDefinitions>
             <Button Content="Добавить"
                     Grid.Column="0"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.NewUser}"/>
             <Button Content="Редактировать"
                     Grid.Column="1"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     Command="{Binding EditUserCommand}"/>
             <Button Content="Удалить"
                     Grid.Column="2"

@@ -19,6 +19,6 @@
         <Button Content="Экспортировать"
                 Grid.Row="1"
                 Command="{Binding ExprotToContractCommand}"
-                Style="{StaticResource AddButtonTheme}"/>
+                Style="{StaticResource DefaultButtonTheme}"/>
     </Grid>
 </UserControl>

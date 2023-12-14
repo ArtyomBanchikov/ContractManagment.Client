@@ -22,6 +22,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
         public ICommand DeleteKeyCommand { get; set; }
         public ICommand RefreshKeyCommand { get; set; }
         public bool IsKeySelected => SelectedKey != null;
+        public bool IsRemovable => SelectedKey.IsAllowToDelete;
 
         private KeyModel _selectedKey;
         public KeyModel SelectedKey
@@ -32,6 +33,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 _selectedKey = value;
                 OnPropertyChanged(nameof(SelectedKey));
                 OnPropertyChanged(nameof(IsKeySelected));
+                OnPropertyChanged(nameof(IsRemovable));
             }
         }
 
