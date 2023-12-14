@@ -8,6 +8,7 @@
     <ApplicationIcon>sign-document-icon.ico</ApplicationIcon>
     <IsPublishable>True</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
