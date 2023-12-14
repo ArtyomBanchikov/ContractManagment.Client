@@ -16,11 +16,11 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
                 Content="Сгенерировать"
-                Style="{StaticResource AddButtonTheme}"
+                Style="{StaticResource DefaultButtonTheme}"
                 Command="{Binding GenerateContractCommand}"/>
         <Button Grid.Column="1"
                 Content="Добавить"
-                Style="{StaticResource AddButtonTheme}"
+                Style="{StaticResource DefaultButtonTheme}"
                 Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.NewContract}"/>
         <Button Grid.Column="2"
                 Content="Удалить"

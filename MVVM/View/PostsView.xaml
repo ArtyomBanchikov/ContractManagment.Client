@@ -48,7 +48,7 @@
 
             <Button Grid.Column="2"
                     Content="Поиск"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     Command="{Binding PostSearchCommand}"/>
         </Grid>
         <ListView Background="#646770"
@@ -59,7 +59,7 @@
                   ItemContainerStyle="{StaticResource RecordCardTheme}"/>
         <Button Content="Открыть"
                 Grid.Row="2"
-                Style="{StaticResource AddButtonTheme}"
+                Style="{StaticResource DefaultButtonTheme}"
                 Command="{Binding PostOpenCommand}"/>
     </Grid>
 </UserControl>

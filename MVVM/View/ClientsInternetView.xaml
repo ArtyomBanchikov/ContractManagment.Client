@@ -41,7 +41,7 @@
             </TextBox>
             <Button Content="Поиск"
                     Grid.Column="2"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     Command="{Binding ClientInternetSearchCommand}"/>
         </Grid>
         <ListView Grid.Row="1"
@@ -52,7 +52,7 @@
         <Button Grid.Row="2"
                 Grid.ColumnSpan="2"
                 Content="Экспортировать"
-                Style="{StaticResource AddButtonTheme}"
+                Style="{StaticResource DefaultButtonTheme}"
                 Command="{Binding ExprotToContractCommand}"/>
     </Grid>
 </UserControl>
