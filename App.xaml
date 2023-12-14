@@ -68,7 +68,7 @@
                 <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/KeyCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/DeleteButtonTheme.xaml"/>
-                <ResourceDictionary Source="Themes/AddButtonTheme.xaml"/>
+                <ResourceDictionary Source="Themes/DefaultButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/FindedKeyCardTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ImageButtonTheme.xaml"/>
                 <ResourceDictionary Source="Themes/KeyRecordCardTheme.xaml"/>

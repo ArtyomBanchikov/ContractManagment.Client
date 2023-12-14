@@ -35,6 +35,7 @@
                                      Foreground="#E6F3F5"
                                      FontSize="13"
                                      FontWeight="DemiBold"
+                                     HorizontalAlignment="Left"
                                      VerticalAlignment="Center"/>
                         </Grid>
                     </Border>

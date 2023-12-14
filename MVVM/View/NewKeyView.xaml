@@ -77,7 +77,7 @@
         <Button Grid.Row="3"
                     Grid.ColumnSpan="3"
                     Content="Добавить"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     MaxWidth="450"
                     Command="{Binding AddKeyCommand}"/>
     </Grid>

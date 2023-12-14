@@ -40,11 +40,12 @@
             <Button Content="Удалить"
                     Grid.Column="1"
                     Style="{StaticResource DeleteButtonTheme}"
-                    Command="{Binding DeleteKeyCommand}"/>
+                    Command="{Binding DeleteKeyCommand}"
+                    IsEnabled="{Binding IsRemovable}"/>
             
             <Button Content="Добавить"
                     Grid.Column="0"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.NewKey}"/>
         </Grid>
     </Grid>

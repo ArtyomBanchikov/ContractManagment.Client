@@ -113,7 +113,7 @@
                          VerticalAlignment="Center"/>
 
             <Button Content="Обновить"
-                    Style="{StaticResource AddButtonTheme}"
+                    Style="{StaticResource DefaultButtonTheme}"
                     Click="UpdateUserButton_Click"
                     Grid.Row="6"
                     Grid.ColumnSpan="3"

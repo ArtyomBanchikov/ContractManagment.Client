@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ContractManagment.Client.MVVM.Model
 {
@@ -12,5 +8,6 @@ namespace ContractManagment.Client.MVVM.Model
         public string Name { get; set; } = null!;
         public string Key { get; set; } = null!;
         public List<ContractModel> Contracts { get; set; }
+        public bool IsAllowToDelete { get; set; }
     }
 }
