@@ -66,7 +66,7 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<ClientInternetViewModel>();
             services.AddSingleton<ClientDigitalViewModel>();
             services.AddSingleton<ContractViewModel>();
-            services.AddSingleton<NewContractViewModel>();
+            services.AddTransient<NewContractViewModel>();
             services.AddSingleton<RecordViewModel>();
             services.AddSingleton<KeyViewModel>();
             services.AddSingleton<NewKeyViewModel>();
