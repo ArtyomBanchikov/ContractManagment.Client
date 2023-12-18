@@ -50,6 +50,8 @@ namespace ContractManagment.Client.Commands.Contract
                     Regex regex = new Regex(@"\[\S{1,30}\]", RegexOptions.Singleline);
                     MatchCollection matches = regex.Matches(text);
                     matches.DistinctBy(i => i.Value);
+                    _viewModel.FindedKeys.Clear();
+                    _viewModel.UnfindedKeys.Clear();
                     foreach (Match match in matches)
                     {
                         KeyModel key = _viewModel.FindedKeys.FirstOrDefault(k => k.Key == match.Value[1..^1]);
