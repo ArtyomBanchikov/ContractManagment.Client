@@ -2,6 +2,7 @@
 using ContractManagment.Client.MVVM.ViewModel.Contract;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.WebClients;
+using ContractManagment.Client.State.WebClients.ModelClients.Record;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace ContractManagment.Client.Commands.Contract
                     FindAndReplace(app, $"[{key.Key}]", key.Value.Trim());
                     record.RecordKeys.Add(key);
                 }
-                IReadWriteClient<RecordModel> recordClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IReadWriteClient<RecordModel>>();
+                IRecordClient recordClient = ServiceProviderFactory.ServiceProvider.GetRequiredService<IRecordClient>();
                 await recordClient.Create(record);
             }
         }

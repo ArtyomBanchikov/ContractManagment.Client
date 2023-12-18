@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string Key { get; set; }
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
         public int RecordId { get; set; }
         public RecordModel? Record { get; set; }
     }

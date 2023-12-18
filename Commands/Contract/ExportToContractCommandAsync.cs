@@ -33,7 +33,7 @@ namespace ContractManagment.Client.Commands.Contract
                 contractVM.SelectedContractName = null;
                 foreach (RecordKeyModel recordoredKey in contractVM.RecordKeys)
                 {
-                    if (!string.IsNullOrEmpty(recordoredKey.Value))
+                    if (!string.IsNullOrEmpty(recordoredKey.Value.Trim()))
                     {
                         RecordKeyModel oldRecord = contractVM.AllKeys.FirstOrDefault(old => old.Key == recordoredKey.Key);
                         if (oldRecord == null)
