@@ -1,4 +1,5 @@
-﻿using ContractManagment.Client.MVVM.Model.User;
+﻿using AutoUpdaterDotNET;
+using ContractManagment.Client.MVVM.Model.User;
 using ContractManagment.Client.MVVM.View.Factories;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
@@ -20,6 +21,7 @@ namespace ContractManagment.Client.Services.StartServices
 
         public void Start()
         {
+            AutoUpdater.Start("http:///ContractManagment.Client.xml");
             Window window;
             if (_xmlProvider.IsRemember)
             {
