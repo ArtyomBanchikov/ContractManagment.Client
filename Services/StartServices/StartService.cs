@@ -18,7 +18,7 @@ namespace ContractManagment.Client.Services.StartServices
             _xmlProvider = xmlProvider;
             _authenticator = authenticator;
         }
-
+        
         public void Start()
         {
             AutoUpdater.Start("http:///ContractManagment.Client.xml");
