@@ -21,7 +21,7 @@ namespace ContractManagment.Client.Services.StartServices
         
         public void Start()
         {
-            AutoUpdater.Start("http:///ContractManagment.Client.xml");
+            AutoUpdater.ShowSkipButton = false;
             Window window;
             if (_xmlProvider.IsRemember)
             {
