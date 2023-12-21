@@ -8,9 +8,9 @@
     <ApplicationIcon>sign-document-icon.ico</ApplicationIcon>
     <IsPublishable>True</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <NeutralLanguage>ru</NeutralLanguage>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <AssemblyVersion>1.2.1</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
