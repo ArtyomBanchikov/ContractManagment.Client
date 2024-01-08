@@ -13,14 +13,29 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ComboBox Style="{DynamicResource ContractComboBoxTheme}" ItemsSource="{Binding ContractsNames}"
-                  Grid.Row="0"
-                  BorderThickness="0"
-                  Foreground="#E6F3F5"
-                  FontSize="14"
-                  FontWeight="SemiBold"
-                  SelectedItem="{Binding SelectedContractName}"
-                  SelectionChanged="Contracts_SelectionChanged"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Content="Выберите документ :"
+                   FontSize="14"
+                   FontWeight="DemiBold"
+                   Foreground="#E6F3F5"
+                   Background="#646770"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"/>
+            <ComboBox Style="{DynamicResource ContractComboBoxTheme}" ItemsSource="{Binding ContractsNames}"
+                      Grid.Column="1"
+                      BorderThickness="0"
+                      Foreground="#E6F3F5"
+                      FontSize="14"
+                      FontWeight="SemiBold"
+                      SelectedItem="{Binding SelectedContractName}"
+                      SelectionChanged="Contracts_SelectionChanged"/>
+        </Grid>
+        
         <ListView ItemsSource="{Binding RecordKeys}"
                   Grid.Row="1"
                   Background="#646770"
