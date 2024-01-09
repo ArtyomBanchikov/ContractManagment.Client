@@ -6,11 +6,7 @@ using ContractManagment.Client.Services;
 using ContractManagment.Client.State.Navigators;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
@@ -22,7 +18,16 @@ namespace ContractManagment.Client.MVVM.ViewModel
         public ICommand DeleteKeyCommand { get; set; }
         public ICommand RefreshKeyCommand { get; set; }
         public bool IsKeySelected => SelectedKey != null;
-        public bool IsRemovable => SelectedKey.IsAllowToDelete;
+        public bool IsRemovable
+        {
+            get
+            {
+                if (IsKeySelected)
+                    return SelectedKey.IsAllowToDelete;
+                else
+                    return false;
+            }
+        }
 
         private KeyModel _selectedKey;
         public KeyModel SelectedKey
