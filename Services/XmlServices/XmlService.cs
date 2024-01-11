@@ -1,8 +1,6 @@
 ﻿using ContractManagment.Client.State;
-using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
-using System.Windows.Xps.Serialization;
 using System.Xml.Linq;
 
 namespace ContractManagment.Client.Services.XmlServices
@@ -13,13 +11,17 @@ namespace ContractManagment.Client.Services.XmlServices
         private readonly XDocument _settingsDoc;
         public XmlService()
         {
-            _userDoc = XDocument.Load("UserInfo.xml");
-            _settingsDoc = XDocument.Load("appsettings.xml");
-
-            if (_userDoc == null)
-            {
+            if(File.Exists("UserInfo.xml"))
+                _userDoc = XDocument.Load("UserInfo.xml");
+            else
                 _userDoc = new XDocument();
-            }
+            
+            if(File.Exists("appsettings.xml"))
+                _settingsDoc = XDocument.Load("appsettings.xml");
+            else
+                _settingsDoc = new XDocument();
+
+
             XElement userInfo = _userDoc.Element("userinfo");
             if (userInfo == null)
             {
@@ -32,12 +34,13 @@ namespace ContractManagment.Client.Services.XmlServices
                 token = new XElement("Token");
                 userInfo.Add(token);
             }
-
-
-            if (_settingsDoc == null)
+            XElement login = userInfo.Element("LastLogin");
+            if (login == null)
             {
-                _settingsDoc = new XDocument();
+                login = new XElement("LastLogin");
+                userInfo.Add(login);
             }
+
             XElement settingsInfo = _settingsDoc.Element("settings");
             if (settingsInfo == null)
             {
@@ -97,6 +100,21 @@ namespace ContractManagment.Client.Services.XmlServices
                 _userDoc.Save("UserInfo.xml");
              }
         }
+        public string LastLogin
+        {
+            get
+            {
+                XElement userInfo = _userDoc.Element("userinfo");
+                return userInfo.Element("LastLogin").Value;
+            }
+            set
+            {
+                XElement userInfo = _userDoc.Element("userinfo");
+                XElement login = userInfo.Element("LastLogin");
+                login.Value = value;
+                _userDoc.Save("UserInfo.xml");
+            }
+        }
 
         public string ServerAddress
         {
@@ -113,7 +131,6 @@ namespace ContractManagment.Client.Services.XmlServices
                 _settingsDoc.Save("appsettings.xml");
             }
         }
-
         public bool IsRemember
         {
             get
@@ -131,5 +148,6 @@ namespace ContractManagment.Client.Services.XmlServices
                 _settingsDoc.Save("appsettings.xml");
             }
         }
+
     }
 }

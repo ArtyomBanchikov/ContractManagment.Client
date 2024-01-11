@@ -18,16 +18,16 @@ namespace ContractManagment.Client.MVVM.View
     {
         public ICommand LoginCommand { get; set; }
         private IAuthenticator _authenticator;
-        private IPasswordHasher passwordHasher;
         private IXmlService _xmlProvider;
         public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, IXmlService xmlProvider)
         {
             DataContext = viewModel;
             LoginCommand = viewModel.LoginCommand;
             _authenticator = authenticator;
-            passwordHasher = new PasswordHasher();
             _xmlProvider = xmlProvider;
             InitializeComponent();
+            if(!string.IsNullOrEmpty(xmlProvider.LastLogin))
+                LoginBox.Text = xmlProvider.LastLogin;
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
@@ -59,6 +59,7 @@ namespace ContractManagment.Client.MVVM.View
                             _xmlProvider.IsRemember=false;
                             _xmlProvider.Token = "";
                         }
+                        _xmlProvider.LastLogin = LoginBox.Text;
                         MainWindow window = MainWindowFactory.NewWindow();
 
                         window.Show();
