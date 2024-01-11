@@ -5,5 +5,6 @@
         string Token { get; set; }
         bool IsRemember { get; set; }
         string ServerAddress { get; set; }
+        string LastLogin { get; set; }
     }
 }
