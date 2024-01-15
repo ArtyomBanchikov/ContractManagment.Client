@@ -1,5 +1,6 @@
 ﻿using ContractManagment.Client.Commands;
 using ContractManagment.Client.Core;
+using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using System.Windows.Input;
 
@@ -31,8 +32,10 @@ namespace ContractManagment.Client.MVVM.ViewModel
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(IAuthenticator authenticator)
+        public LoginViewModel(IAuthenticator authenticator, IXmlService xmlProvider)
         {
+            if (!string.IsNullOrEmpty(xmlProvider.LastLogin))
+                Login = xmlProvider.LastLogin;
             LoginCommand = new LoginCommandAsync(authenticator, this);
         }
     }

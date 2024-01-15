@@ -59,7 +59,18 @@ namespace ContractManagment.Client.Services.XmlServices
                 serverAddress = new XElement("ServerAddress");
                 settingsInfo.Add(serverAddress);
             }
-
+            XElement width = settingsInfo.Element("WindowWidth");
+            if(width == null)
+            {
+                width = new XElement("WindowWidth");
+                settingsInfo.Add(width);
+            }
+            XElement height = settingsInfo.Element("WindowHeight");
+            if (height == null)
+            {
+                height = new XElement("WindowHeight");
+                settingsInfo.Add(height);
+            }
 
             _userDoc.Save("UserInfo.xml");
             _settingsDoc.Save("appsettings.xml");
@@ -148,6 +159,39 @@ namespace ContractManagment.Client.Services.XmlServices
                 _settingsDoc.Save("appsettings.xml");
             }
         }
-
+        public int Width
+        {
+            get
+            {
+                XElement settingsInfo = _settingsDoc.Element("settings");
+                int width = 800;
+                int.TryParse(settingsInfo.Element("WindowWidth").Value, out width);
+                return width;
+            }
+            set
+            {
+                XElement settingsInfo = _settingsDoc.Element("settings");
+                XElement width = settingsInfo.Element("WindowWidth");
+                width.Value = value.ToString();
+                _settingsDoc.Save("appsettings.xml");
+            }
+        }
+        public int Height
+        {
+            get
+            {
+                XElement settingsInfo = _settingsDoc.Element("settings");
+                int height = 800;
+                int.TryParse(settingsInfo.Element("WindowHeight").Value, out height);
+                return height;
+            }
+            set
+            {
+                XElement settingsInfo = _settingsDoc.Element("settings");
+                XElement height = settingsInfo.Element("WindowHeight");
+                height.Value = value.ToString();
+                _settingsDoc.Save("appsettings.xml");
+            }
+        }
     }
 }
