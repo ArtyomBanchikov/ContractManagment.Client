@@ -13,6 +13,28 @@ namespace ContractManagment.Client.MVVM.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        private int _windowHeight;
+        
+        private int _windowWidth;
+
+        public int WindowHeight
+        {
+            get { return _windowHeight; } set
+            {
+                _windowHeight = value;
+                OnPropertyChanged(nameof(WindowHeight));
+            }
+        }
+        public int WindowWidth
+        {
+            get { return _windowWidth; }
+            set
+            {
+                _windowWidth = value;
+                OnPropertyChanged(nameof(WindowWidth));
+            }
+        }
+
         private object _panel;
         public object Panel
         {
@@ -45,8 +67,10 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public MainViewModel(IAuthenticator authenticator, INavigator navigator)
+        public MainViewModel(IAuthenticator authenticator, INavigator navigator, IXmlService xmlService)
         {
+            WindowHeight = xmlService.Height;
+            WindowWidth = xmlService.Width;
             Navigator = navigator;
             Authenticator = authenticator;
             if (Authenticator.IsLoggedIn)

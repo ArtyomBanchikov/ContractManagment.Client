@@ -1,18 +1,10 @@
 ﻿using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.Services;
+using ContractManagment.Client.Services.XmlServices;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ContractManagment.Client.MVVM.View
 {
@@ -47,6 +39,9 @@ namespace ContractManagment.Client.MVVM.View
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            IXmlService xmlService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>();
+            xmlService.Height = (int)Height;
+            xmlService.Width = (int)Width;
             Application.Current.Shutdown();
         }
     }
