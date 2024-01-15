@@ -69,7 +69,11 @@ namespace ContractManagment.Client.MVVM.ViewModel
         }
         public MainViewModel(IAuthenticator authenticator, INavigator navigator, IXmlService xmlService)
         {
-            WindowHeight = xmlService.Height;
+            if ((int)System.Windows.SystemParameters.PrimaryScreenHeight < xmlService.Height)
+                WindowHeight = (int)System.Windows.SystemParameters.PrimaryScreenHeight;
+            else
+                WindowHeight = xmlService.Height;
+
             WindowWidth = xmlService.Width;
             Navigator = navigator;
             Authenticator = authenticator;

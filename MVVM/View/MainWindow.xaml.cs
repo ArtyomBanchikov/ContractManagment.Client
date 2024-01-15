@@ -39,6 +39,8 @@ namespace ContractManagment.Client.MVVM.View
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
             IXmlService xmlService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>();
             xmlService.Height = (int)Height;
             xmlService.Width = (int)Width;
