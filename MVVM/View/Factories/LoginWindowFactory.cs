@@ -19,14 +19,14 @@ namespace ContractManagment.Client.MVVM.View.Factories
         {
             IXmlService xmlService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>();
             IAuthenticator authenticator = ServiceProviderFactory.ServiceProvider.GetRequiredService<IAuthenticator>();
-            LoginViewModel loginVM = new LoginViewModel(authenticator);
+            LoginViewModel loginVM = new LoginViewModel(authenticator, xmlService);
             Window = new LoginView(loginVM, authenticator, xmlService);
         }
         public static LoginView NewWindow()
         {
             IXmlService xmlService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>();
             IAuthenticator authenticator = ServiceProviderFactory.ServiceProvider.GetRequiredService<IAuthenticator>();
-            LoginViewModel loginVM = new LoginViewModel(authenticator);
+            LoginViewModel loginVM = new LoginViewModel(authenticator, xmlService);
             Window = new LoginView(loginVM, authenticator, xmlService);
             return Window;
         }

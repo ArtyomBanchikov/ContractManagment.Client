@@ -26,8 +26,6 @@ namespace ContractManagment.Client.MVVM.View
             _authenticator = authenticator;
             _xmlProvider = xmlProvider;
             InitializeComponent();
-            if(!string.IsNullOrEmpty(xmlProvider.LastLogin))
-                LoginBox.Text = xmlProvider.LastLogin;
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
