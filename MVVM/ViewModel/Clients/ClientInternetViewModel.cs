@@ -1,4 +1,4 @@
-﻿using ContractManagment.Client.Commands;
+﻿using ContractManagment.Client.Commands.Clients;
 using ContractManagment.Client.Commands.Contract;
 using ContractManagment.Client.Core;
 using ContractManagment.Client.MVVM.Model.ClientInternet;
@@ -6,7 +6,7 @@ using ContractManagment.Client.State.Navigators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace ContractManagment.Client.MVVM.ViewModel
+namespace ContractManagment.Client.MVVM.ViewModel.Clients
 {
     public class ClientInternetViewModel : ExportToContractViewModelBase
     {

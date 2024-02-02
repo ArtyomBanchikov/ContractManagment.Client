@@ -1,6 +1,6 @@
 ﻿using ContractManagment.Client.MVVM.Model.ClientInternet;
 using ContractManagment.Client.MVVM.Model.Records;
-using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.MVVM.ViewModel.Clients;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.WebClients;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ContractManagment.Client.Commands
+namespace ContractManagment.Client.Commands.Clients
 {
     public class ClientInternetSearchCommandAsync : AsyncBaseCommand
     {

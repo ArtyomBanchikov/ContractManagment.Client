@@ -1,12 +1,12 @@
 ﻿using ContractManagment.Client.Commands.Contract;
-using ContractManagment.Client.Commands;
 using ContractManagment.Client.Core;
 using ContractManagment.Client.State.Navigators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ContractManagment.Client.MVVM.Model.ClientDigital;
+using ContractManagment.Client.Commands.Clients;
 
-namespace ContractManagment.Client.MVVM.ViewModel
+namespace ContractManagment.Client.MVVM.ViewModel.Clients
 {
     public class ClientDigitalViewModel : ExportToContractViewModelBase
     {
@@ -35,7 +35,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
         public ICommand ClientDigitalSearchCommand { get; set; }
         public ICommand ExprotToContractCommand { get; set; }
         public ClientDigitalViewModel(INavigator navigator)
-            : base()
+            :base()
         {
             ClientDigitalSearchCommand = new ClientDigitalSearchCommandAsync(this);
             ExprotToContractCommand = new ExportToContractCommandAsync(navigator, this);
