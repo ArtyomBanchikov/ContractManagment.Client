@@ -5,10 +5,12 @@
              xmlns:contractVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.Contract"
              xmlns:panelVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.Panel"
              xmlns:userVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.User"
+             xmlns:clientVMs="clr-namespace:ContractManagment.Client.MVVM.ViewModel.Clients"
              xmlns:views="clr-namespace:ContractManagment.Client.MVVM.View"
              xmlns:contractViews="clr-namespace:ContractManagment.Client.MVVM.View.Contract"
              xmlns:panelViews="clr-namespace:ContractManagment.Client.MVVM.View.Panel"
              xmlns:userViews="clr-namespace:ContractManagment.Client.MVVM.View.User"
+             xmlns:clientViews="clr-namespace:ContractManagment.Client.MVVM.View.Clients"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
              xmlns:local="clr-namespace:ContractManagment.Client">
     <Application.Resources>
@@ -22,11 +24,14 @@
             <DataTemplate DataType="{x:Type panelVMs:ManagerPanelViewModel}">
                 <panelViews:ManagerPanelView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ClientInternetViewModel}">
-                <views:ClientsInternetView/>
+            <DataTemplate DataType="{x:Type clientVMs:ClientInternetViewModel}">
+                <clientViews:ClientsInternetView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:ClientDigitalViewModel}">
-                <views:ClientsDigitalView/>
+            <DataTemplate DataType="{x:Type clientVMs:ClientDigitalViewModel}">
+                <clientViews:ClientsDigitalView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type clientVMs:ClientIPTVViewModel}">
+                <clientViews:ClientsIPTVView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type contractVMs:ContractViewModel}">
                 <contractViews:ContractsView/>

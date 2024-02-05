@@ -1,17 +1,17 @@
-﻿using ContractManagment.Client.Commands;
-using ContractManagment.Client.Commands.Contract;
+﻿using ContractManagment.Client.Commands.Contract;
 using ContractManagment.Client.Core;
-using ContractManagment.Client.MVVM.Model.ClientInternet;
 using ContractManagment.Client.State.Navigators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using ContractManagment.Client.MVVM.Model.ClientDigital;
+using ContractManagment.Client.Commands.Clients;
 
-namespace ContractManagment.Client.MVVM.ViewModel
+namespace ContractManagment.Client.MVVM.ViewModel.Clients
 {
-    public class ClientInternetViewModel : ExportToContractViewModelBase
+    public class ClientDigitalViewModel : ExportToContractViewModelBase
     {
-        private ClientInternetModel _findedClient;
-        public ClientInternetModel FindedClient
+        private ClientDigitalModel _findedClient;
+        public ClientDigitalModel FindedClient
         {
             get { return _findedClient; }
             set
@@ -31,13 +31,13 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged(nameof(AccountSearch));
             }
         }
-        public ObservableCollection<ClientInternetModel> Clients { get; set; }
-        public ICommand ClientInternetSearchCommand { get; set; }
+        public ObservableCollection<ClientDigitalModel> Clients { get; set; }
+        public ICommand ClientDigitalSearchCommand { get; set; }
         public ICommand ExprotToContractCommand { get; set; }
-        public ClientInternetViewModel(INavigator navigator)
+        public ClientDigitalViewModel(INavigator navigator)
             :base()
         {
-            ClientInternetSearchCommand = new ClientInternetSearchCommandAsync(this);
+            ClientDigitalSearchCommand = new ClientDigitalSearchCommandAsync(this);
             ExprotToContractCommand = new ExportToContractCommandAsync(navigator, this);
         }
     }

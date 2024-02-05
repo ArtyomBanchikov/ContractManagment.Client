@@ -1,17 +1,17 @@
 ﻿using ContractManagment.Client.Commands.Contract;
-using ContractManagment.Client.Commands;
 using ContractManagment.Client.Core;
 using ContractManagment.Client.State.Navigators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using ContractManagment.Client.MVVM.Model.ClientDigital;
+using ContractManagment.Client.MVVM.Model.ClientIPTV;
+using ContractManagment.Client.Commands.Clients;
 
-namespace ContractManagment.Client.MVVM.ViewModel
+namespace ContractManagment.Client.MVVM.ViewModel.Clients
 {
-    public class ClientDigitalViewModel : ExportToContractViewModelBase
+    public class ClientIPTVViewModel : ExportToContractViewModelBase
     {
-        private ClientDigitalModel _findedClient;
-        public ClientDigitalModel FindedClient
+        private ClientIPTVModel _findedClient;
+        public ClientIPTVModel FindedClient
         {
             get { return _findedClient; }
             set
@@ -31,13 +31,13 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged(nameof(AccountSearch));
             }
         }
-        public ObservableCollection<ClientDigitalModel> Clients { get; set; }
-        public ICommand ClientDigitalSearchCommand { get; set; }
+        public ObservableCollection<ClientIPTVModel> Clients { get; set; }
+        public ICommand ClientIPTVSearchCommand { get; set; }
         public ICommand ExprotToContractCommand { get; set; }
-        public ClientDigitalViewModel(INavigator navigator)
+        public ClientIPTVViewModel(INavigator navigator)
             : base()
         {
-            ClientDigitalSearchCommand = new ClientDigitalSearchCommandAsync(this);
+            ClientIPTVSearchCommand = new ClientIPTVSearchCommandAsync(this);
             ExprotToContractCommand = new ExportToContractCommandAsync(navigator, this);
         }
     }

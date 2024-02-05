@@ -20,6 +20,9 @@ using ContractManagment.Client.State.WebClients.ModelClients.ClientInternet;
 using ContractManagment.Client.MVVM.Model.ClientDigital;
 using ContractManagment.Client.State.WebClients.ModelClients.ClientDigital;
 using ContractManagment.Client.MVVM.ViewModel.User;
+using ContractManagment.Client.MVVM.ViewModel.Clients;
+using ContractManagment.Client.MVVM.Model.ClientIPTV;
+using ContractManagment.Client.State.WebClients.ModelClients.ClientIPTV;
 
 namespace ContractManagment.Client.Services
 {
@@ -46,6 +49,12 @@ namespace ContractManagment.Client.Services
             services.AddSingleton<IReadClient<ClientDigitalAddParamModel>, ClientDigitalAddParamClient>();
             services.AddSingleton<IReadClient<ClientDigitalModel>, ClientDigitalClient>();
 
+            services.AddSingleton<IReadClient<AccountTariffIPTVModel>, AccountTariffIPTVClient>();
+            services.AddSingleton<IReadClient<TariffIPTVModel>, TariffIPTVClient>();
+            services.AddSingleton<IReadClient<IPTVAddParamModel>, IPTVAddParamClient>();
+            services.AddSingleton<IReadClient<ClientIPTVAddParamModel>, ClientIPTVAddParamClient>();
+            services.AddSingleton<IReadClient<ClientIPTVModel>, ClientIPTVClient>();
+
             services.AddSingleton<IPostClient, PostClient>();
             services.AddSingleton<IReadClient<PostMetaModel>, PostMetaClient>();
 
@@ -63,8 +72,11 @@ namespace ContractManagment.Client.Services
 
             services.AddSingleton<HistoryViewModel>();
             services.AddSingleton<PostsViewModel>();
+
             services.AddSingleton<ClientInternetViewModel>();
             services.AddSingleton<ClientDigitalViewModel>();
+            services.AddSingleton<ClientIPTVViewModel>();
+
             services.AddSingleton<ContractViewModel>();
             services.AddTransient<NewContractViewModel>();
             services.AddSingleton<RecordViewModel>();

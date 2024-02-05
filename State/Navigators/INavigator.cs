@@ -10,6 +10,7 @@ namespace ContractManagment.Client.State.Navigators
         Keys,
         ClientsInternet,
         ClientsDigital,
+        ClientsIPTV,
         Requests,
         History,
         NewKey,

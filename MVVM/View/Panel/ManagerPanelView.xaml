@@ -27,6 +27,9 @@
             <RadioButton Content="Биллинг Цифра ТВ"
                      Style="{StaticResource MenuButtonTheme}"
                      Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.ClientsDigital}"/>
+            <RadioButton Content="Биллинг IPTV"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding UpdateCurrentViewModel}" CommandParameter="{x:Static nav:ViewType.ClientsIPTV}"/>
         </StackPanel>
     </Grid>
 </UserControl>
