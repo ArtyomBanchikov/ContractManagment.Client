@@ -28,6 +28,8 @@ namespace ContractManagment.Client.Commands.Contract
         {
             ContractViewModel contractVM = ServiceProviderFactory.ServiceProvider.GetRequiredService<ContractViewModel>();
             _navigator.CurrentViewModel = contractVM;
+            contractVM.AllKeys.Clear();
+            contractVM.RecordKeys.Clear();
             if (contractVM.SelectedContractName != null)
             {
                 contractVM.SelectedContractName = null;

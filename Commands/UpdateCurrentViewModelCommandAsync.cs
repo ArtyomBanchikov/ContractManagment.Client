@@ -2,6 +2,7 @@
 using ContractManagment.Client.MVVM.Model.Records;
 using ContractManagment.Client.MVVM.Model.User;
 using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.MVVM.ViewModel.Clients;
 using ContractManagment.Client.MVVM.ViewModel.Contract;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.Authenticators;
@@ -95,6 +96,10 @@ namespace ContractManagment.Client.Commands
 
                     case ViewType.ClientsDigital:
                         _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ClientDigitalViewModel>();
+                        break;
+
+                    case ViewType.ClientsIPTV:
+                        _navigator.CurrentViewModel = ServiceProviderFactory.ServiceProvider.GetRequiredService<ClientIPTVViewModel>();
                         break;
 
                     case ViewType.Requests:

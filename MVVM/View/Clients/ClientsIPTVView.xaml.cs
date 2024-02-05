@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContractManagment.Client.MVVM.View
+namespace ContractManagment.Client.MVVM.View.Clients
 {
     /// <summary>
-    /// Логика взаимодействия для ClientsDigitalView.xaml
+    /// Логика взаимодействия для ClientsIPTVView.xaml
     /// </summary>
-    public partial class ClientsDigitalView : UserControl
+    public partial class ClientsIPTVView : UserControl
     {
-        public ClientsDigitalView()
+        public ClientsIPTVView()
         {
             InitializeComponent();
         }

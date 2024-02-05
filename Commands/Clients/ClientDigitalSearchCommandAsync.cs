@@ -1,9 +1,8 @@
 ﻿using ContractManagment.Client.MVVM.Model.ClientDigital;
 using ContractManagment.Client.MVVM.Model.Records;
-using ContractManagment.Client.MVVM.ViewModel;
+using ContractManagment.Client.MVVM.ViewModel.Clients;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.State.WebClients;
-using ContractManagment.Client.State.WebClients.ModelClients.ClientDigital;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ContractManagment.Client.Commands
+namespace ContractManagment.Client.Commands.Clients
 {
     public class ClientDigitalSearchCommandAsync : AsyncBaseCommand
     {

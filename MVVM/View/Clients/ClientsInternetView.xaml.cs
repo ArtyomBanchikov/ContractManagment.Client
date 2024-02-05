@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContractManagment.Client.MVVM.View
+namespace ContractManagment.Client.MVVM.View.Clients
 {
     /// <summary>
     /// Логика взаимодействия для ClientsView.xaml
