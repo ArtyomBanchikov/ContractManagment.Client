@@ -112,7 +112,8 @@
                     Margin="7"
                     FontSize="15"
                     FontWeight="DemiBold"
-                    Click="Login_Click">
+                    Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding ElementName=password_box}">
 
                 <Button.Style>
                     <Style TargetType="Button">
