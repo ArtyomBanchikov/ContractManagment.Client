@@ -28,16 +28,15 @@ namespace ContractManagment.Client.State.WebClients
 
         public async Task<LoginUserModel> Login(ShortUserModel user)
         {
-            //var response = Client.PostAsJsonAsync($"/login", user).Result;
-            //LoginUserModel loginUser = response.Content.ReadFromJsonAsync<LoginUserModel>().Result;
-            LoginUserModel loginUser = await Client.PostAsJsonAsync("/login", user).Result.Content.ReadFromJsonAsync<LoginUserModel>();
+            var response = await Client.PostAsJsonAsync("/login", user);
+            LoginUserModel loginUser = await response.Content.ReadFromJsonAsync<LoginUserModel>();
             if (loginUser != null &&
                 loginUser.Name != null &&
                 loginUser.Token != null &&
                 loginUser.Role != null)
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginUser.Token);
             else
-                throw new Exception("Ошибка авторизации");
+                throw new Exception("Неверный логин/пароль");
             return loginUser;
         }
 
@@ -49,7 +48,7 @@ namespace ContractManagment.Client.State.WebClients
         public async Task<LoginUserModel> TokenInfo(string token)
         {
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            LoginUserModel user = Client.GetFromJsonAsync<LoginUserModel>($"/userinfo/").Result;
+            LoginUserModel user = await Client.GetFromJsonAsync<LoginUserModel>($"/userinfo/");
             return user;
         }
     }

@@ -2,6 +2,7 @@
 using ContractManagment.Client.Core;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
+using System;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
@@ -29,14 +30,18 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public ICommand LoginCommand { get; }
+        public event EventHandler LoginSuccessful;
 
         public LoginViewModel(IAuthenticator authenticator, IXmlService xmlProvider)
         {
             if (!string.IsNullOrEmpty(xmlProvider.LastLogin))
                 Login = xmlProvider.LastLogin;
-            LoginCommand = new LoginCommandAsync(authenticator, this);
+            LoginCommand = new LoginCommandAsync(authenticator, this, xmlProvider);
+        }
+        public void OnLoginSuccessful()
+        {
+            LoginSuccessful?.Invoke(this, EventArgs.Empty);
         }
     }
 }

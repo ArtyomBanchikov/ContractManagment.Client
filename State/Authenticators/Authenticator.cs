@@ -29,11 +29,10 @@ namespace ContractManagment.Client.State.Authenticators
         }
 
 
-        public async Task<bool> Login(string username, string password)
+        public async Task Login(string username, string password)
         {
             ShortUserModel loginUser = new() { Name = username, Password = password };
             CurrentUser = await _webClient.Login(loginUser);
-            return false;
         }
 
         public void Logout()
