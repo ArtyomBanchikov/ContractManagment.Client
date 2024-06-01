@@ -3,6 +3,7 @@ using ContractManagment.Client.Core;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using System;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
@@ -30,6 +31,18 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string appVersion;
+        public string AppVersion
+        {
+            get { return appVersion; }
+            set
+            {
+                appVersion = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand LoginCommand { get; }
         public event EventHandler LoginSuccessful;
 
@@ -38,6 +51,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
             if (!string.IsNullOrEmpty(xmlProvider.LastLogin))
                 Login = xmlProvider.LastLogin;
             LoginCommand = new LoginCommandAsync(authenticator, this, xmlProvider);
+            AppVersion = "ContractManagment v" + Assembly.GetEntryAssembly().GetName().Version.ToString(); 
         }
         public void OnLoginSuccessful()
         {
