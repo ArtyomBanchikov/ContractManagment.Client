@@ -36,6 +36,7 @@ namespace ContractManagment.Client.Commands
             MainWindow mainWindow = MainWindowFactory.Window;
             LoginView loginView = LoginWindowFactory.NewWindow();
             loginView.Show();
+            mainWindow.Exitable = false;
             mainWindow.Close();
             Application.Current.MainWindow = loginView;
         }
