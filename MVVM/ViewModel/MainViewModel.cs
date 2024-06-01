@@ -7,6 +7,7 @@ using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using ContractManagment.Client.State.Navigators;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace ContractManagment.Client.MVVM.ViewModel
@@ -55,6 +56,17 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string appVersion;
+        public string AppVersion
+        {
+            get { return appVersion; }
+            set
+            {
+                appVersion = value;
+                OnPropertyChanged();
+            }
+        }
         public IAuthenticator Authenticator { get; set; }
         public INavigator Navigator { get; set; }
         private LoginUserModel _currentUser;
@@ -93,6 +105,7 @@ namespace ContractManagment.Client.MVVM.ViewModel
                 }
             }
             LogoutCommand = new LogoutCommand(authenticator, ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>());
+            AppVersion = "ContractManagment v" + Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
     }
 }
