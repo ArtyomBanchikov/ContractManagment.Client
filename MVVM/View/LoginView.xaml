@@ -116,6 +116,7 @@
                       FontWeight="DemiBold"
                       Grid.Row="5"
                       FontSize="15"
+                      IsChecked="{Binding IsRemember}"
                       VerticalAlignment="Center"/>
 
             <Button Grid.Row="6"
