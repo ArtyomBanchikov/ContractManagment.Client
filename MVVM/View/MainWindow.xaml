@@ -25,36 +25,49 @@
         <Border Grid.Row="0"
                 Background="#54565E"
                 MouseDown="Border_MouseDown">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button Content="🗕"
-                        FontSize="13"
-                        FontWeight="Bold"
-                        Padding="0,0,0,3"
-                        Height="25"
-                        Width="25"
-                        Foreground="#E6F3F5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="MinimizeButton_Click"/>
-                <Button Content="🗖"
-                        FontSize="15"
-                        Padding="0,0,0,3"
-                        Height="25"
-                        Width="25"
-                        Foreground="#E6F3F5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="MaximizeButton_Click"/>
-                <Button Content="✕"
-                        FontSize="13"
-                        Height="25"
-                        Width="25"
-                        Foreground="#E6F3F5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Click="CloseButton_Click"/>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Grid.Column="1">
+                    <Button Content="🗕"
+                            FontSize="13"
+                            FontWeight="Bold"
+                            Padding="0,0,0,3"
+                            Height="25"
+                            Width="25"
+                            Foreground="#E6F3F5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="MinimizeButton_Click"/>
+                    <Button Content="🗖"
+                            FontSize="15"
+                            Padding="0,0,0,3"
+                            Height="25"
+                            Width="25"
+                            Foreground="#E6F3F5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="MaximizeButton_Click"/>
+                    <Button Content="✕"
+                            FontSize="13"
+                            Height="25"
+                            Width="25"
+                            Foreground="#E6F3F5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="CloseButton_Click"/>
+                </StackPanel>
+                <Label Grid.Column="0" Content="{Binding AppVersion}"
+                                       FontSize="11"
+                                       Foreground="#CED9DB"
+                                       FontWeight="SemiBold"/>
+            </Grid>
+            
         </Border>
         
         <Grid Background="#5C5F68"

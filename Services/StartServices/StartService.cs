@@ -6,6 +6,7 @@ using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ContractManagment.Client.Services.StartServices
@@ -36,7 +37,7 @@ namespace ContractManagment.Client.Services.StartServices
                 WindowOpen();
             }
         }
-        public void WindowOpen()
+        public async Task WindowOpen()
         {
             Window window;
             if (_xmlProvider.IsRemember)
@@ -44,7 +45,7 @@ namespace ContractManagment.Client.Services.StartServices
                 try
                 {
                     IAuthenticator authenticator = ServiceProviderFactory.ServiceProvider.GetRequiredService<IAuthenticator>();
-                    LoginUserModel loginUser = authenticator.TokenCheck(_xmlProvider.Token).Result;
+                    LoginUserModel loginUser = await authenticator.TokenCheck(_xmlProvider.Token);
                     window = MainWindowFactory.Window;
                     window.Show();
                 }

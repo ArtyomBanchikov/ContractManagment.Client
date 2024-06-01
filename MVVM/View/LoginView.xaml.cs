@@ -3,9 +3,7 @@ using ContractManagment.Client.MVVM.ViewModel;
 using ContractManagment.Client.Services;
 using ContractManagment.Client.Services.XmlServices;
 using ContractManagment.Client.State.Authenticators;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,58 +14,24 @@ namespace ContractManagment.Client.MVVM.View
     /// </summary>
     public partial class LoginView : Window
     {
+        public bool Exitable { get; set; } = true;
         public ICommand LoginCommand { get; set; }
-        private IAuthenticator _authenticator;
-        private IXmlService _xmlProvider;
-        public LoginView(LoginViewModel viewModel, IAuthenticator authenticator, IXmlService xmlProvider)
+        public LoginView(LoginViewModel viewModel)
         {
             DataContext = viewModel;
             LoginCommand = viewModel.LoginCommand;
-            _authenticator = authenticator;
-            _xmlProvider = xmlProvider;
             InitializeComponent();
+
+            viewModel.LoginSuccessful += (sender, e) =>
+            {
+                MainWindow window = MainWindowFactory.NewWindow();
+
+                window.Show();
+                Application.Current.MainWindow = window;
+                Exitable = false;
+                Close();
+            };
         }
-
-        private async void Login_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(LoginBox.Text))
-            {
-                MessageBox.Show("Введите имя пользователя");
-                LoginBox.Focus();
-            }
-            else if(string.IsNullOrEmpty(password_box.Password))
-            {
-                MessageBox.Show("Введите пароль");
-                password_box.Focus();
-            }
-            else 
-            {
-                if (LoginCommand != null)
-                {
-                    LoginCommand.Execute(password_box.Password);
-                    if (_authenticator != null && _authenticator.IsLoggedIn)
-                    {
-                        if ((bool)RememberCheck.IsChecked)
-                        {
-                            _xmlProvider.IsRemember = true;
-                            _xmlProvider.Token = _authenticator.CurrentUser.Token;
-                        }
-                        else if(_xmlProvider.IsRemember)
-                        {
-                            _xmlProvider.IsRemember=false;
-                            _xmlProvider.Token = "";
-                        }
-                        _xmlProvider.LastLogin = LoginBox.Text;
-                        MainWindow window = MainWindowFactory.NewWindow();
-
-                        window.Show();
-                        this.Close();
-                        Application.Current.MainWindow = window;
-                    }
-                }
-            }
-        }
-
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if(e.LeftButton == MouseButtonState.Pressed)
@@ -89,6 +53,18 @@ namespace ContractManagment.Client.MVVM.View
             if(e.Key == Key.Enter)
             {
                 password_box.Focus();
+            }
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (Exitable)
+            {
+                e.Cancel = true;
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                base.OnClosing(e);
             }
         }
     }

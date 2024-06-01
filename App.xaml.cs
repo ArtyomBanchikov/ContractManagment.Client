@@ -30,16 +30,14 @@ namespace ContractManagment.Client
             {
                 exception = exception.InnerException;
             }
-            if(exception is HttpRequestException)
+            if(exception is HttpRequestException || exception is SocketException)
             {
                 if(((HttpRequestException)exception).StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
                     MessageBox.Show("Ошибка авторизации");
                 }
-            }
-            else if (exception is SocketException || exception is HttpRequestException)
-            {
-                MessageBox.Show("Не удалось подключиться к серверу");
+                else
+                    MessageBox.Show("Не удалось подключиться к серверу");
             }
             else
             {
