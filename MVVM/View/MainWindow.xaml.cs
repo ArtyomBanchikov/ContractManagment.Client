@@ -3,6 +3,7 @@ using ContractManagment.Client.Services;
 using ContractManagment.Client.Services.XmlServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,6 +14,7 @@ namespace ContractManagment.Client.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool Exitable { get; set; } = true;
         public MainWindow(MainViewModel viewModel)
         {
             DataContext = viewModel;
@@ -45,6 +47,24 @@ namespace ContractManagment.Client.MVVM.View
             xmlService.Height = (int)Height;
             xmlService.Width = (int)Width;
             Application.Current.Shutdown();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (Exitable)
+            {
+                e.Cancel = true;
+                if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                IXmlService xmlService = ServiceProviderFactory.ServiceProvider.GetRequiredService<IXmlService>();
+                xmlService.Height = (int)Height;
+                xmlService.Width = (int)Width;
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                Exitable = false;
+                base.OnClosing(e);
+            }
         }
     }
 }
